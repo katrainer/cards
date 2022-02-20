@@ -1,0 +1,15 @@
+.checkbox{
+    border: 1px solid #fff;
+    font-size: 24pt;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 0.25em;
+    margin: 4px 8px 8px 8px;
+    padding: 2px;
+    text-align: center;
+    vertical-align: middle;
+}
+.spanClassName{
+
+}

@@ -1,0 +1,12 @@
+.containerMain {
+    max-width: 100%;
+}
+
+.containerNavLink {
+    display: flex;
+    justify-content: space-around;
+}
+
+.navLinkItem {
+    text-decoration: none;
+}

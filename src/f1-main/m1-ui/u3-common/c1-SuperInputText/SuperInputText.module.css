@@ -1,0 +1,19 @@
+.superInput {
+    border:2px solid #aaa;
+    border-radius:4px;
+    margin:8px 0;
+    outline:none;
+    padding:8px;
+    box-sizing:border-box;
+    transition:.3s;
+}
+
+.errorInput {
+    border: 3px solid lime;
+    background: red;
+    color: red;
+}
+
+.error {
+    color: red;
+}

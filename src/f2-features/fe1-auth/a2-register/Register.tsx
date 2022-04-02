@@ -1,5 +1,5 @@
 import {useFormik} from 'formik'
-import {auth} from '../../../f1-main/u3-API/api';
+import {auth} from '../../../f1-main/m3-API/api';
 
 export const Register = () => {
     const formik = useFormik({
@@ -23,7 +23,7 @@ export const Register = () => {
     });
     return (
         <div>
-            <h2>LOGIN</h2>
+            <h2>Register</h2>
             <form onSubmit={formik.handleSubmit}>
                 <input id={'email'}
                        type={'email'}

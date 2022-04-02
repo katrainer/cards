@@ -1,7 +1,6 @@
-type initialStateType = typeof initialState
 const initialState = {}
 
-export const SomeRed2 = (state: any = initialState, action: any) => {
+export const SomeRed2 = (state: initialStateType = initialState, action: SomeRed2ActionType) => {
     switch (action.type) {
         default:
             return {...state}
@@ -9,7 +8,10 @@ export const SomeRed2 = (state: any = initialState, action: any) => {
 }
 
 // action creator
-type GeneralActionType = any
 
 
 //thunk creator
+
+//type
+type initialStateType = typeof initialState
+export type SomeRed2ActionType = any

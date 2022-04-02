@@ -10,10 +10,9 @@ export const authRed = (state: initialStateType = initialState, action: AuthRedA
 // action creator
 
 
-
 //thunk creator
 
 
 //type
-type AuthRedActionType = any
+export type AuthRedActionType = any
 type initialStateType = typeof initialState

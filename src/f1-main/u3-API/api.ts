@@ -9,7 +9,7 @@ export const auth = {
     register(email: string, password: string) {
         return instance.post('auth/register', {
             email,
-            password
-        })
+            password,
+        }).then(res=>res)
     },
 }

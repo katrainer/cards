@@ -8,7 +8,7 @@ const initialState = {
     } as ProfileType
 }
 
-export const profileReducer = (state: initialStateType = initialState, action: GeneralActionType): initialStateType => {
+export const profileReducer = (state: initialStateType = initialState, action: ProfileActionType): initialStateType => {
     switch (action.type) {
         case "SET_PROFILE":
             return {...state, profile: action.profile}
@@ -18,7 +18,7 @@ export const profileReducer = (state: initialStateType = initialState, action: G
 }
 
 // action creator
-type GeneralActionType = ReturnType<typeof setProfile>
+export type ProfileActionType = ReturnType<typeof setProfile>
 
 export const setProfile = (profile: ProfileType) => {
     return {

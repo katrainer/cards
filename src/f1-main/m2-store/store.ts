@@ -18,7 +18,7 @@ export type AppActionType = AuthRedActionType | SomeRed2ActionType
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, AppActionType>
 
 //Типизация стора
-type AppRootStateType = ReturnType<typeof rootReducer>
+export type AppRootStateType = ReturnType<typeof rootReducer>
 
 
 //@ts-ignore

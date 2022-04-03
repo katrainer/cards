@@ -1,4 +1,5 @@
 import {instance} from './apiConfig/apiConfig'
+import {AxiosResponse} from 'axios';
 
 export const auth = {
     //Регистрация
@@ -10,7 +11,7 @@ export const auth = {
     },
     //Войти (логин, в аргумент передаем сразу объект с данными)
     logIn(data: LogInArgsType) {
-        return instance.post('auth/login', data).then(res => res)
+        return instance.post<LogInArgsType, AxiosResponse<ProfileType>>('auth/login', data).then(res => res)
     },
     //проверка куки
     me() {
@@ -35,7 +36,7 @@ export const auth = {
 }
 
 //type
-type LogInArgsType = {
+export type LogInArgsType = {
     email: string
     password: string
     rememberMe: boolean
@@ -48,4 +49,17 @@ password recovery link:
 <a href='http://localhost:3000/#/set-new-password/$token$'>
 link</a>
 </div>`
+}
+
+export type ProfileType = {
+    _id: string;
+    email: string;
+    name: string;
+    avatar?: string;
+    publicCardPacksCount: number; // количество колод
+    created: Date;
+    updated: Date;
+    isAdmin: boolean;
+    verified: boolean; // подтвердил ли почту
+    rememberMe: boolean;
 }

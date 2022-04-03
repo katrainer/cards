@@ -15,7 +15,7 @@ export const auth = {
     },
     //проверка куки
     me() {
-        return instance.post('auth/me', {}).then(res => res)
+        return instance.post<ProfileType>('auth/me', {}).then(res => res)
     },
     //Обновление имени или фото. По дефолту для фото задал стандартное значение (можно фото не предавать)
     updateMe(name: string, avatar: string = 'https//avatar-url.img') {
@@ -30,8 +30,10 @@ export const auth = {
         return instance.post('auth/forgot', data).then(res => res)
     },
     //Задаем новый пароль
-    serNewPassword(newPassword: string, resetPasswordToken: string) {//Чо за токен я хз
-        return instance.post('auth/set-new-password').then(res => res)
+    setNewPassword(password: string, resetPasswordToken: string) {
+        return instance.post('auth/set-new-password', {
+            password, resetPasswordToken
+        }).then(res => res)
     }
 }
 
@@ -39,9 +41,9 @@ export const auth = {
 export type LogInArgsType = {
     email: string
     password: string
-    rememberMe: boolean
+    rememberMe?: boolean
 }
-type PasswordRecoveryType = {
+export type PasswordRecoveryType = {
     email: string // кому восстанавливать пароль
     from: string //"test-front-admin <ai73a@yandex.by>",можно указать разработчика фронта
     message: `<div style="background-color: lime; padding: 15px">

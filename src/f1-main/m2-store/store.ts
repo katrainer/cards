@@ -14,6 +14,7 @@ const rootReducer = combineReducers({
 export const store = createStore(rootReducer, applyMiddleware(thunk))
 
 
+
 //type
 
 //Типизация санок
@@ -22,7 +23,6 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateTy
 
 //Типизация стора
 export type AppRootStateType = ReturnType<typeof rootReducer>
-
 
 //@ts-ignore
 window.store = store

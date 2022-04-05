@@ -3,7 +3,7 @@ import {AppThunk} from '../store';
 
 
 enum EnumReducerActionType {
-    isRegister = 'AUTH/IS-REGISTER',
+    Register = 'AUTH/IS-REGISTER',
 }
 
 
@@ -13,7 +13,7 @@ const initialState = {
 
 export const RegisterReducer = (state: initialStateType = initialState, action: RegisterReducerActionType): initialStateType => {
     switch (action.type) {
-        case EnumReducerActionType.isRegister:
+        case EnumReducerActionType.Register:
             return {...state, ...action.payload}
         default:
             return state
@@ -24,7 +24,7 @@ export const RegisterReducer = (state: initialStateType = initialState, action: 
 
 const RegisterAC = () => {
     return {
-        type: EnumReducerActionType.isRegister,
+        type: EnumReducerActionType.Register,
         payload: {isRegister: true}
     } as const
 }

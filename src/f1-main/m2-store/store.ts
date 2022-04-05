@@ -2,7 +2,7 @@ import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import thunk, {ThunkAction} from 'redux-thunk';
 import {authRed} from './reducers/authRed';
-import {RegisterReducer, RegisterReducerActionType} from './reducers/Register-reducer';
+import {RegisterReducer, RegisterReducerActionType} from './reducers/signUp-reducer';
 
 
 const rootReducer = combineReducers({

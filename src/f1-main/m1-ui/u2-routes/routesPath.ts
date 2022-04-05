@@ -1,6 +1,6 @@
 export const routesPath = {
     login: '/login',
-    register: '/register',
+    signUp: '/signUp',
     passwordRecovery: '/passwordRecovery',
     passwordChange: '/passwordChange',
     profile: '/profile',

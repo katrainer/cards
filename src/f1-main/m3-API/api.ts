@@ -42,7 +42,9 @@ type LogInArgsType = {
 
 export type RegisterType = {
   email: string,
-  password: string
+  password: string,
+  firstName:string,
+  lastName:string
 };
 
 type PasswordRecoveryType = {

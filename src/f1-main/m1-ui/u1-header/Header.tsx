@@ -8,7 +8,7 @@ export const Header = () =>{
         <h1>Name of application</h1>
         <div className={s.containerNavLink}>
             <NavLink className={s.navLinkItem} to={routesPath.login}>Login </NavLink>
-            <NavLink className={s.navLinkItem} to={routesPath.register}>Register </NavLink>
+            <NavLink className={s.navLinkItem} to={routesPath.signUp}>Sign Up </NavLink>
             <NavLink className={s.navLinkItem} to={routesPath.passwordRecovery}>PasswordRecovery </NavLink>
             <NavLink className={s.navLinkItem} to={routesPath.passwordChange}>PasswordChange </NavLink>
             <NavLink className={s.navLinkItem} to={routesPath.profile}>Profile </NavLink>

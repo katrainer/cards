@@ -6,13 +6,15 @@ import {Navigate} from 'react-router-dom';
 import {routesPath} from '../../../f1-main/m1-ui/u2-routes/routesPath';
 import {RegisterTC} from '../../../f1-main/m2-store/reducers/Register-reducer';
 
-export const Register = () => {
+export const SignUp = () => {
     const isRegister = useSelector<AppRootStateType, boolean>(state => state.register.isRegister)
     const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
+            firstName:'',
+            lastName:''
         },
         onSubmit: (values: RegisterType) => {
             dispatch(RegisterTC(values))
@@ -21,6 +23,14 @@ export const Register = () => {
     
     return <div>
         <form onSubmit={formik.handleSubmit}>
+        <input id={'firstName'}
+                   type={'text'}
+                   placeholder={'First Name'}
+                   {...formik.getFieldProps('firstName')}/><br/>
+                   <input id={'lastName'}
+                   type={'text'}
+                   placeholder={'Last Name'}
+                   {...formik.getFieldProps('lastName')}/><br/>
             <input id={'email'}
                    type={'email'}
                    placeholder={'email'}
@@ -30,7 +40,7 @@ export const Register = () => {
                    placeholder={'password'}
                    {...formik.getFieldProps('password')}/>
             <br/>
-            <button type={'submit'}>Register</button>
+            <button type={'submit'}>Sign Up</button>
         </form>
         {isRegister && <Navigate to={routesPath.login}/>}
     </div>

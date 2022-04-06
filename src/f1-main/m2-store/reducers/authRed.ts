@@ -1,47 +1,71 @@
-import {auth, LogInArgsType, ProfileType} from '../../m3-API/api';
+import {auth, LogInArgsType, RegisterType} from '../../m3-API/api';
 import {AppThunk} from '../store';
+import axios from 'axios';
+import {isLoggedIn, setProfile} from './ProfileReducer';
 
 enum EnumAuthRedActionType {
     logIn = 'AUTH/LOG-IN',
     isMe = 'AUTH/IS-ME',
+    register = 'AUTH/IS-REGISTER'
 }
 
 const initialState = {
-    profile: {},
     isMe: false,
+    isRegister: false
 }
 
-export const authRed = (state: initialStateType = initialState, action: AuthRedActionType) => {
+export const authRed = (state: initialStateType = initialState, action: AuthRedActionType): initialStateType => {
     switch (action.type) {
-        case EnumAuthRedActionType.logIn:
-            return {...state, profile: {...action.payload.profileData}}
         case EnumAuthRedActionType.isMe:
-            return {...state, isMe: true}
+        case EnumAuthRedActionType.register:
+            return {...state, ...action.payload}
         default:
             return {...state}
     }
 }
 
 // action creator
-const logInAC = (profileData: ProfileType) => {
+const isMeAC = () => {
     return {
-        type: EnumAuthRedActionType.logIn,
-        payload: {profileData}
+        type: EnumAuthRedActionType.isMe,
+        payload: {isMe: true}
     } as const
 }
-const isMe = () => {
-    return {type: EnumAuthRedActionType.isMe} as const
+const RegisterAC = () => {
+    return {
+        type: EnumAuthRedActionType.register,
+        payload: {isRegister: true}
+    } as const
 }
-
 
 //thunk creator
 export const logInTC = (data: LogInArgsType): AppThunk => async dispatch => {
     try {
         const res = await auth.logIn(data)
-        dispatch(logInAC(res.data))
-        dispatch(isMe())
+        dispatch(setProfile(res.data))
+        dispatch(isMeAC())
+    } catch (error: any) {
+        alert(error.error)
+    }
+}
+export const isMeTC = (): AppThunk => async (dispatch) => {
+    try {
+        const response = await auth.me()
+        dispatch(setProfile(response.data))
+        dispatch(isLoggedIn(true))
     } catch (error) {
-        alert(error)
+        if (axios.isAxiosError(error) && error.response) {
+            const errorMessage = error.response.data.error;
+            console.log(errorMessage)
+        }
+    }
+}
+export const RegisterTC = (data: RegisterType): AppThunk => async dispatch => {
+    try {
+        const res = await auth.register(data)
+        dispatch(RegisterAC())
+    } catch (e: any) {
+        alert(e)
     }
 }
 
@@ -49,5 +73,5 @@ export const logInTC = (data: LogInArgsType): AppThunk => async dispatch => {
 //type
 type initialStateType = typeof initialState
 export type AuthRedActionType =
-    | ReturnType<typeof logInAC>
-    | ReturnType<typeof isMe>
+    | ReturnType<typeof isMeAC>
+    | ReturnType<typeof RegisterAC>

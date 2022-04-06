@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Route, Routes} from 'react-router-dom';
 import './App.module.css';
 import {Login} from '../f2-features/fe1-auth/a1-login/Login';
@@ -11,9 +11,17 @@ import {Test} from '../f2-features/fe0-test/Test';
 import {routesPath} from './m1-ui/u2-routes/routesPath';
 import {Header} from './m1-ui/u1-header/Header';
 import s from './App.module.css'
+import {useDispatch} from 'react-redux';
+import {isMeTC} from './m2-store/reducers/authRed';
 
 function App() {
-    return (<div className={s.containerMain}>
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(isMeTC())
+    }, [])
+    return (
+
+        <div className={s.containerMain}>
             <Header/>
             <Routes>
                 <Route path={routesPath.login} element={<Login/>}/>

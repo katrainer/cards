@@ -12,7 +12,7 @@ export const Login = () => {
     const navigate = useNavigate()
 
     //редирект на регистрацию, если нет профиля
-    const goToRegisterHandler = () => navigate(routesPath.register)
+    const goToRegisterHandler = () => navigate(routesPath.signUp)
 
     const formik = useFormik({
         initialValues: {

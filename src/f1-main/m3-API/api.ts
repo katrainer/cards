@@ -1,20 +1,20 @@
 import {instance} from './apiConfig/apiConfig'
+import {AxiosResponse} from 'axios';
 
 export const auth = {
     //Регистрация
-    register(email: string, password: string) {
+    register(data: RegisterType) {
         return instance.post('auth/register', {
-            email,
-            password,
+            ...data
         }).then(res => res)
     },
     //Войти (логин, в аргумент передаем сразу объект с данными)
     logIn(data: LogInArgsType) {
-        return instance.post('auth/login', data).then(res => res)
+        return instance.post<LogInArgsType, AxiosResponse<ProfileType>>('auth/login', data).then(res => res)
     },
     //проверка куки
     me() {
-        return instance.post('auth/me', {}).then(res => res)
+        return instance.post<ProfileType>('auth/me', {}).then(res => res)
     },
     //Обновление имени или фото. По дефолту для фото задал стандартное значение (можно фото не предавать)
     updateMe(name: string, avatar: string = 'https//avatar-url.img') {
@@ -35,7 +35,7 @@ export const auth = {
 }
 
 //type
-type LogInArgsType = {
+export type LogInArgsType = {
     email: string
     password: string
     rememberMe: boolean
@@ -49,3 +49,22 @@ password recovery link:
 link</a>
 </div>`
 }
+
+export type RegisterType = {
+    email: string
+    password: string
+}
+
+export type ProfileType = {
+    _id: string;
+    email: string;
+    name: string;
+    avatar?: string;
+    publicCardPacksCount: number;
+    created: Date;
+    updated: Date;
+    isAdmin: boolean;
+    verified: boolean;
+    rememberMe: boolean;
+    error?: string;
+};

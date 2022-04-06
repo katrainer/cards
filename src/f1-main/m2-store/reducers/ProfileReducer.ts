@@ -1,4 +1,4 @@
-import { ProfileType } from "f1-main/m3-API/api"
+import {ProfileType} from 'f1-main/m3-API/api'
 
 type initialStateType = typeof initialState
 
@@ -11,6 +11,8 @@ export const profileReducer = (state: initialStateType = initialState, action: P
     switch (action.type) {
         case 'SET_PROFILE':
             return {...state, profile: action.profile}
+        case 'DELETE-PROFILE':
+            return {...state, profile: action.payload}
         default:
             return {...state}
     }
@@ -18,9 +20,10 @@ export const profileReducer = (state: initialStateType = initialState, action: P
 
 // action creator
 export type ProfileActionType =
-    ReturnType<typeof setProfile>
+    | ReturnType<typeof setProfile>
     | ReturnType<typeof updateProfile>
     | ReturnType<typeof isLoggedIn>
+    | ReturnType<typeof deleteProfile>
 
 export const setProfile = (profile: ProfileType) => {
     return {
@@ -41,6 +44,12 @@ export const isLoggedIn = (isAuth: boolean) => {
     return {
         type: 'IS_LOGGED_IN',
         isAuth,
+    } as const
+}
+export const deleteProfile = () => {
+    return {
+        type: 'DELETE-PROFILE',
+        payload: {} as ProfileType
     } as const
 }
 

@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../../f1-main/m2-store/store';
 import {Navigate} from 'react-router-dom';
 import {routesPath} from '../../../f1-main/m1-ui/u2-routes/routesPath';
-import {RegisterTC} from '../../../f1-main/m2-store/reducers/authRed';
+import {registerTC} from '../../../f1-main/m2-store/reducers/authRed';
 
 export const SignUp = () => {
     const Register = useSelector<AppRootStateType, boolean>(
@@ -40,7 +40,7 @@ export const SignUp = () => {
             return errors;
         },
         onSubmit: (values: RegisterType) => {
-            dispatch(RegisterTC(values));
+            dispatch(registerTC(values));
         },
     });
 

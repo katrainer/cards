@@ -20,7 +20,6 @@ function App() {
         dispatch(isMeTC())
     }, [])
     return (
-
         <div className={s.containerMain}>
             <Header/>
             <Routes>

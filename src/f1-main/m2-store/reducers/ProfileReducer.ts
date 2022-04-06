@@ -1,16 +1,19 @@
-import { ProfileType } from "f1-main/m3-API/api"
+import {auth, ProfileType} from "f1-main/m3-API/api"
+import {AppThunk} from "../store";
+import axios from "axios";
+import {loadingAC} from "./loadingReducer";
 
 type initialStateType = typeof initialState
 
 
-const initialState = {
-    profile: {} as ProfileType,
-}
+const initialState = {} as ProfileType
 
 export const profileReducer = (state: initialStateType = initialState, action: ProfileActionType): initialStateType => {
     switch (action.type) {
         case 'SET_PROFILE':
-            return {...state, profile: action.profile}
+            return {...state, ...action.profile}
+        case 'UPDATE_PROFILE':
+            return { ...state, ...action.payload }
         default:
             return {...state}
     }
@@ -20,7 +23,6 @@ export const profileReducer = (state: initialStateType = initialState, action: P
 export type ProfileActionType =
     ReturnType<typeof setProfile>
     | ReturnType<typeof updateProfile>
-    | ReturnType<typeof isLoggedIn>
 
 export const setProfile = (profile: ProfileType) => {
     return {
@@ -32,17 +34,27 @@ export const setProfile = (profile: ProfileType) => {
 export const updateProfile = (name: string, avatar: string) => {
     return {
         type: 'UPDATE_PROFILE',
-        name,
-        avatar,
+        payload: {
+            name,
+            avatar,
+        }
     } as const
 }
-
-export const isLoggedIn = (isAuth: boolean) => {
-    return {
-        type: 'IS_LOGGED_IN',
-        isAuth,
-    } as const
-}
-
 
 //thunk creator
+
+export const updateTC = (name?: string | undefined, avatar?: string | undefined): AppThunk => async (dispatch) => {
+    dispatch(loadingAC(true))
+    try {
+        const response = await auth.updateMe(name, avatar)
+        dispatch(updateProfile(response.data.updatedUser.name, response.data.updatedUser.avatar))
+    } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+            const errorMessage = error.response.data.error;
+            console.log(errorMessage)
+        }
+    } finally {
+        dispatch(loadingAC(false))
+    }
+
+}

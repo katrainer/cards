@@ -1,7 +1,8 @@
 import {auth, LogInArgsType, RegisterType} from '../../m3-API/api';
 import {AppThunk} from '../store';
 import axios from 'axios';
-import {isLoggedIn, setProfile} from './ProfileReducer';
+import {setProfile} from './ProfileReducer';
+import {loadingAC} from "./loadingReducer";
 
 enum EnumAuthRedActionType {
     logIn = 'AUTH/LOG-IN',
@@ -49,15 +50,18 @@ export const logInTC = (data: LogInArgsType): AppThunk => async dispatch => {
     }
 }
 export const isMeTC = (): AppThunk => async (dispatch) => {
+    dispatch(loadingAC(true))
     try {
         const response = await auth.me()
         dispatch(setProfile(response.data))
-        dispatch(isLoggedIn(true))
+        dispatch(isMeAC())
     } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
             const errorMessage = error.response.data.error;
             console.log(errorMessage)
         }
+    } finally {
+        dispatch(loadingAC(false))
     }
 }
 export const RegisterTC = (data: RegisterType): AppThunk => async dispatch => {

@@ -17,7 +17,7 @@ export const auth = {
         return instance.post<ProfileType>('auth/me', {}).then(res => res)
     },
     //Обновление имени или фото. По дефолту для фото задал стандартное значение (можно фото не предавать)
-    updateMe(name: string, avatar: string = 'https//avatar-url.img') {
+    updateMe(name: string | undefined, avatar: string | undefined = 'https//avatar-url.img') {
         return instance.put('auth/me', {name, avatar}).then(res => res)
     },
     //Выйти (разлогивание)

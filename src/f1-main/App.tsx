@@ -13,16 +13,22 @@ import {Header} from './m1-ui/u1-header/Header';
 import s from './App.module.css'
 import {useDispatch} from 'react-redux';
 import {isMeTC} from './m2-store/reducers/authRed';
+import {useAppSelector} from "./m2-store/store";
+import Preloader from "./m1-ui/u3-common/Preloader/Preloader";
 
 function App() {
+
+    const isLoading = useAppSelector(store => store.loading.isLoading)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(isMeTC())
     }, [])
+
     return (
 
         <div className={s.containerMain}>
             <Header/>
+            {isLoading && <Preloader/>}
             <Routes>
                 <Route path={routesPath.login} element={<Login/>}/>
                 <Route path={routesPath.signUp} element={<SignUp/>}/>

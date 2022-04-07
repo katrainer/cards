@@ -18,18 +18,14 @@
     pointer-events: all;
 }
 
-.form {
+.modal__content {
     padding: 20px;
     border-radius: 12px;
     background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     transform: scale(0.5);
     transition: 0.4s all;
 }
 
-.form.active {
+.modal__content.active {
     transform: scale(1);
 }

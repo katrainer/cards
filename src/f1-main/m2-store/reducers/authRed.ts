@@ -152,15 +152,7 @@ link</a>
     }
   };
 
-  /*export const passwordChangeTC = (password: string, param: string = ''): AppThunk => async dispatch => {
-    try {
-        const res = await auth.setNewPassword(password, param)
-        dispatch(deleteProfileAC())
-        alert('пароль поменялся')
-    } catch (e) {
-        alert(e)
-    }
-} */
+
 
 //type
 type initialStateType = typeof initialState;

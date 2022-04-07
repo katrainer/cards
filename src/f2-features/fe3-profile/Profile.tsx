@@ -10,8 +10,8 @@ import {ProfileUpdateForm} from "../../f1-main/m1-ui/u3-common/ProfileUpdateForm
 
 export const Profile = () => {
 
-    const avatar = useSelector<AppRootStateType, string | undefined>((state) => state.profilePage.avatar)
-    const name = useSelector<AppRootStateType, string>((state) => state.profilePage.name)
+    const avatar = useSelector<AppRootStateType, string | undefined>((state) => state.profilePage.profile.avatar)
+    const name = useSelector<AppRootStateType, string>((state) => state.profilePage.profile.name)
     const isAuth = useSelector<AppRootStateType, boolean>((state) => state.auth.isMe)
 
     const [editMode, setEditMode] = useState(false)

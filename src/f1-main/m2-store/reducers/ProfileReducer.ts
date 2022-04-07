@@ -1,7 +1,7 @@
 import {auth, ProfileType} from "f1-main/m3-API/api"
 import {AppThunk} from "../store";
 import axios from "axios";
-import {loadingAC} from "./loadingReducer";
+import {loadingAC} from "./appReducer";
 
 type initialStateType = typeof initialState
 
@@ -13,10 +13,9 @@ const initialState = {
 export const profileReducer = (state: initialStateType = initialState, action: ProfileActionType): initialStateType => {
     switch (action.type) {
         case 'SET_PROFILE':
-            return {...state, ...action.profile}
+            return {...state, ...action.payload}
         case 'UPDATE_PROFILE':
-            return { ...state, ...action.payload }
-            return {...state, profile: action.profile}
+            return {...state, profile: {...state.profile, ...action.payload}}
         case 'DELETE-PROFILE':
             return {...state, profile: action.payload}
         default:
@@ -28,13 +27,12 @@ export const profileReducer = (state: initialStateType = initialState, action: P
 export type ProfileActionType =
     | ReturnType<typeof setProfile>
     | ReturnType<typeof updateProfile>
-    | ReturnType<typeof isLoggedIn>
     | ReturnType<typeof deleteProfile>
 
 export const setProfile = (profile: ProfileType) => {
     return {
         type: 'SET_PROFILE',
-        profile,
+        payload:{ profile}
     } as const
 }
 

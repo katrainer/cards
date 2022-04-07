@@ -1,9 +1,8 @@
 import {auth, LogInArgsType, RegisterType} from '../../m3-API/api';
 import {AppThunk} from '../store';
 import axios from 'axios';
-import {setProfile} from './ProfileReducer';
-import {loadingAC} from "./loadingReducer";
-import {deleteProfile, isLoggedIn, setProfile} from './ProfileReducer';
+import {deleteProfile, setProfile} from './ProfileReducer';
+import {loadingAC} from "./appReducer";
 
 enum EnumAuthRedActionType {
     logIn = 'AUTH/LOG-IN',

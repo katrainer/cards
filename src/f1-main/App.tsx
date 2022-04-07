@@ -18,16 +18,17 @@ import Preloader from "./m1-ui/u3-common/Preloader/Preloader";
 
 function App() {
 
-    const isLoading = useAppSelector(store => store.loading.isLoading)
+    const isLoading = useAppSelector(store => store.app.isLoading)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(isMeTC())
     }, [])
 
+    if(isLoading) return <Preloader/>
+
     return (
         <div className={s.containerMain}>
             <Header/>
-            {isLoading && <Preloader/>}
             <Routes>
                 <Route path={routesPath.login} element={<Login/>}/>
                 <Route path={routesPath.signUp} element={<SignUp/>}/>

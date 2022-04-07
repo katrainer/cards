@@ -30,7 +30,7 @@ export const auth = {
     },
     //Задаем новый пароль
     newPassword(password: string, resetPasswordToken: string ) {//Чо за токен я хз
-        return instance.post<NewPassResponseType>('auth/sent-new-password', {password, resetPasswordToken}).then(res => res)
+        return instance.post<NewPassResponseType>('auth/set-new-password', {password, resetPasswordToken}).then(res => res)
     }
 }
 

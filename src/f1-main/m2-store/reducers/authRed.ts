@@ -152,10 +152,11 @@ link</a>
     }
   };
 
-  export const setNewPass = (password: string, token: string ): AppThunk => async dispatch => {
+  export const setNewPassTC = (password: string, token: string="" ): AppThunk => async dispatch => {
     try {
-        await auth.newPassword(password, token) //Чо за токен я хз
-            
+        await auth.newPassword(password, token) 
+            dispatch(setTokenIsSentAC(true))
+            dispatch(setPasswordIsCreatedAC(true))
     } catch (e) {
        (e)
     }

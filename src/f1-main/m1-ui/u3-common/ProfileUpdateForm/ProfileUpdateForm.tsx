@@ -1,5 +1,5 @@
 
-import s from './FormUpdateProfile.module.css'
+import s from './ProfileUpdateForm.module.css'
 import {useDispatch} from "react-redux";
 import {useFormik} from "formik";
 import {updateTC} from "../../../m2-store/reducers/ProfileReducer";
@@ -14,7 +14,7 @@ type PropsType = { setEditMode: (editMode: boolean) => void }
 //     avatar?: string
 // }
 
-export const FormUpdateProfile = ({setEditMode}: PropsType) => {
+export const ProfileUpdateForm = ({setEditMode}: PropsType) => {
     const dispatch = useDispatch();
     const formik = useFormik({
         initialValues: {

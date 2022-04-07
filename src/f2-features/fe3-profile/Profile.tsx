@@ -6,7 +6,7 @@ import {Navigate} from 'react-router-dom';
 import {useState} from 'react';
 import SuperButton from '../../f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton';
 import {Modal} from "../../f1-main/m1-ui/u3-common/modal/Modal";
-import {FormUpdateProfile} from "../../f1-main/m1-ui/u3-common/modal/FormUpdateProfile";
+import {ProfileUpdateForm} from "../../f1-main/m1-ui/u3-common/ProfileUpdateForm/ProfileUpdateForm";
 
 export const Profile = () => {
 
@@ -28,7 +28,7 @@ export const Profile = () => {
         <SuperButton onClick={onClickEditMode}>Edit mode
         </SuperButton>
         <Modal editMode={editMode} setEditMode={setEditMode}>
-            <FormUpdateProfile setEditMode={setEditMode}/>
+            <ProfileUpdateForm setEditMode={setEditMode}/>
         </Modal>
     </div>
 }

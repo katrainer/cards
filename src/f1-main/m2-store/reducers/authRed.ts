@@ -152,7 +152,14 @@ link</a>
     }
   };
 
-
+  export const setNewPass = (password: string, token: string ): AppThunk => async dispatch => {
+    try {
+        await auth.newPassword(password, token) //Чо за токен я хз
+            
+    } catch (e) {
+       (e)
+    }
+  }
 
 //type
 type initialStateType = typeof initialState;

@@ -3,14 +3,15 @@ import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
 import { useAppSelector } from "f1-main/m2-store/store";
+import { setNewPass } from "f1-main/m2-store/reducers/authRed";
 
 
 export const PasswordChange = () => {
 
 const passwordIsCreated = useAppSelector<boolean>(state => state.auth.passwordIsCreated)
 const dispatch = useDispatch()
-const token = useParams()
-
+const params = useParams()
+const token = params.token
 
     const formik = useFormik({
         initialValues: {

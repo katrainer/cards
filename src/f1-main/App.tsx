@@ -25,7 +25,6 @@ function App() {
     }, [])
 
     return (
-
         <div className={s.containerMain}>
             <Header/>
             {isLoading && <Preloader/>}

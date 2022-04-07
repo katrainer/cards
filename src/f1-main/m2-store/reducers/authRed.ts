@@ -3,11 +3,13 @@ import {AppThunk} from '../store';
 import axios from 'axios';
 import {setProfile} from './ProfileReducer';
 import {loadingAC} from "./loadingReducer";
+import {deleteProfile, isLoggedIn, setProfile} from './ProfileReducer';
 
 enum EnumAuthRedActionType {
     logIn = 'AUTH/LOG-IN',
     isMe = 'AUTH/IS-ME',
-    register = 'AUTH/IS-REGISTER'
+    register = 'AUTH/IS-REGISTER',
+    logOut = 'AUTH/LOG-OUT',
 }
 
 const initialState = {
@@ -19,6 +21,7 @@ export const authRed = (state: initialStateType = initialState, action: AuthRedA
     switch (action.type) {
         case EnumAuthRedActionType.isMe:
         case EnumAuthRedActionType.register:
+        case EnumAuthRedActionType.logOut:
             return {...state, ...action.payload}
         default:
             return {...state}
@@ -32,10 +35,19 @@ const isMeAC = () => {
         payload: {isMe: true}
     } as const
 }
-const RegisterAC = () => {
+const registerAC = () => {
     return {
         type: EnumAuthRedActionType.register,
         payload: {isRegister: true}
+    } as const
+}
+const logOutAC = () => {
+    return {
+        type: EnumAuthRedActionType.logOut,
+        payload: {
+            isMe: false,
+            isRegister: false,
+        },
     } as const
 }
 
@@ -64,11 +76,20 @@ export const isMeTC = (): AppThunk => async (dispatch) => {
         dispatch(loadingAC(false))
     }
 }
-export const RegisterTC = (data: RegisterType): AppThunk => async dispatch => {
+export const registerTC = (data: RegisterType): AppThunk => async dispatch => {
     try {
         const res = await auth.register(data)
-        dispatch(RegisterAC())
+        dispatch(registerAC())
     } catch (e: any) {
+        alert(e)
+    }
+}
+export const logOutTC = (): AppThunk => async dispatch => {
+    try {
+        const res = await auth.logOut()
+        dispatch(logOutAC())
+        dispatch(deleteProfile())
+    } catch (e) {
         alert(e)
     }
 }
@@ -78,4 +99,5 @@ export const RegisterTC = (data: RegisterType): AppThunk => async dispatch => {
 type initialStateType = typeof initialState
 export type AuthRedActionType =
     | ReturnType<typeof isMeAC>
-    | ReturnType<typeof RegisterAC>
+    | ReturnType<typeof registerAC>
+    | ReturnType<typeof logOutAC>

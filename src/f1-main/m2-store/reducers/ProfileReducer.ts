@@ -6,7 +6,9 @@ import {loadingAC} from "./loadingReducer";
 type initialStateType = typeof initialState
 
 
-const initialState = {} as ProfileType
+const initialState = {
+    profile: {} as ProfileType,
+}
 
 export const profileReducer = (state: initialStateType = initialState, action: ProfileActionType): initialStateType => {
     switch (action.type) {
@@ -14,6 +16,9 @@ export const profileReducer = (state: initialStateType = initialState, action: P
             return {...state, ...action.profile}
         case 'UPDATE_PROFILE':
             return { ...state, ...action.payload }
+            return {...state, profile: action.profile}
+        case 'DELETE-PROFILE':
+            return {...state, profile: action.payload}
         default:
             return {...state}
     }
@@ -21,8 +26,10 @@ export const profileReducer = (state: initialStateType = initialState, action: P
 
 // action creator
 export type ProfileActionType =
-    ReturnType<typeof setProfile>
+    | ReturnType<typeof setProfile>
     | ReturnType<typeof updateProfile>
+    | ReturnType<typeof isLoggedIn>
+    | ReturnType<typeof deleteProfile>
 
 export const setProfile = (profile: ProfileType) => {
     return {
@@ -40,6 +47,13 @@ export const updateProfile = (name: string, avatar: string) => {
         }
     } as const
 }
+export const deleteProfile = () => {
+    return {
+        type: 'DELETE-PROFILE',
+        payload: {} as ProfileType
+    } as const
+}
+
 
 //thunk creator
 

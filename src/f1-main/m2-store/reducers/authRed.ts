@@ -158,10 +158,9 @@ link</a>
             dispatch(setTokenIsSentAC(true))
             dispatch(setPasswordIsCreatedAC(true))
     } catch (e) {
-       (e)
+      
     }
-  }
-
+  }               
 //type
 type initialStateType = typeof initialState;
 export type AuthRedActionType =

@@ -76,6 +76,4 @@ type ForgotResponseType = {
 }
 
 type NewPassResponseType = {
-    password:string
-    resetPasswordToken: string
 }

@@ -3,7 +3,7 @@ export const routesPath = {
     signUp: '/signUp',
     passwordRecovery: '/passwordRecovery',
     checkEmail:'/checkEmail',
-    passwordChange: '/set-new-password/:token',
+    passwordChange: '/set-new-password/*',
     profile: '/profile',
     error: '/*',
     test: '/test',

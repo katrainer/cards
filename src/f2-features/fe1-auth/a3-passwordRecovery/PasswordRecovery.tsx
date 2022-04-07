@@ -8,7 +8,6 @@ import { Navigate } from "react-router-dom";
 
 export const PasswordRecovery = () => {
     const dispatch = useDispatch()
-    const email = useSelector<AppRootStateType, string>(state => state.profilePage.profile.email)
     const sentPassword = useAppSelector<string>(state => state.auth.sentPassword)
     const isLoggedIn = useAppSelector<boolean>(state => state.auth.isMe)
 

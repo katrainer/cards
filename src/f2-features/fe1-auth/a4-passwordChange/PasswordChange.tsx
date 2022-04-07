@@ -34,7 +34,6 @@ const token = params['*']
 
  return (
     <div>
-        {/* <h1>Скоро все будет ;)</h1> */}
         {passwordIsCreated && <Navigate to={'/login'}/>}
     <h1>Remove password</h1>
   <form onSubmit={formik.handleSubmit}>
@@ -51,7 +50,6 @@ const token = params['*']
     <button type={"submit"}>Change password</button>
   </form>
 </div>
-
  )
 }
 

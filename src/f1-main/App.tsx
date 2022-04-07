@@ -13,6 +13,7 @@ import {Header} from './m1-ui/u1-header/Header';
 import s from './App.module.css'
 import {useDispatch} from 'react-redux';
 import {isMeTC} from './m2-store/reducers/authRed';
+import { CheckEmail } from 'f2-features/fe1-auth/a3-passwordRecovery/CheckEmail';
 
 function App() {
     const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function App() {
                 <Route path={routesPath.login} element={<Login/>}/>
                 <Route path={routesPath.signUp} element={<SignUp/>}/>
                 <Route path={routesPath.passwordRecovery} element={<PasswordRecovery/>}/>
+                <Route path={routesPath.checkEmail} element={<CheckEmail/>}/>
                 <Route path={routesPath.passwordChange} element={<PasswordChange/>}/>
                 <Route path={routesPath.profile} element={<Profile/>}/>
                 <Route path={routesPath.error} element={<Error/>}/>

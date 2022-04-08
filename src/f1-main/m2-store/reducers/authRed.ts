@@ -73,11 +73,6 @@ const logOutAC = () => {
             isRegister: false,
         },
     } as const
-
-  return {
-    type: EnumAuthRedActionType.isMe,
-    payload: { isMe: true },
-  } as const
 };
 const RegisterAC = () => {
   return {

@@ -159,9 +159,10 @@ export const sendTokenTC =
       from: "test-front-admin <laub94@list.ru>",
       message: `<div style="background-color: lime; padding: 15px">
 password recovery link: 
-<a href='http://localhost:3000/#/set-new-password/$token$'>
+<a href='https://katrainer.github.io/cards/#/set-new-password/$token$'>
 link</a>
 </div>`,
+
     };
     try {
       await auth.passwordRecovery(data);

@@ -26,11 +26,11 @@ export const auth = {
     },
     //Восстановление пароля
     passwordRecovery(data: PasswordRecoveryType) { //Типизация аргументов запроса могла сломать запрос:D
-        return instance.post('auth/forgot', data).then(res => res)
+        return instance.post<ForgotResponseType>('auth/forgot', data).then(res => res)
     },
     //Задаем новый пароль
-    serNewPassword(newPassword: string, resetPasswordToken: string) {//Чо за токен я хз
-        return instance.post('auth/set-new-password').then(res => res)
+    newPassword(password: string, resetPasswordToken: string ) {//Чо за токен я хз
+        return instance.post<NewPassResponseType>('auth/set-new-password', {password, resetPasswordToken}).then(res => res)
     }
 }
 
@@ -40,7 +40,7 @@ export type LogInArgsType = {
     password: string
     rememberMe: boolean
 }
-type PasswordRecoveryType = {
+export type PasswordRecoveryType = {
     email: string // кому восстанавливать пароль
     from: string //"test-front-admin <ai73a@yandex.by>",можно указать разработчика фронта
     message: `<div style="background-color: lime; padding: 15px">
@@ -68,3 +68,12 @@ export type ProfileType = {
     rememberMe: boolean;
     error?: string;
 };
+
+type ForgotResponseType = {
+    info: string
+    error: string
+    in: string
+}
+
+type NewPassResponseType = {
+}

@@ -1,31 +1,57 @@
-import {auth, LogInArgsType, RegisterType} from '../../m3-API/api';
-import {AppThunk} from '../store';
-import axios from 'axios';
-import {deleteProfile, setProfile} from './ProfileReducer';
+import {
+  auth,
+  LogInArgsType,
+  PasswordRecoveryType,
+  ProfileType,
+  RegisterType,
+} from "../../m3-API/api";
+import { AppThunk } from "../store";
+import axios from "axios";
+import { deleteProfile, setProfile } from "./ProfileReducer";
 import {loadingAC} from "./appReducer";
 
 enum EnumAuthRedActionType {
-    logIn = 'AUTH/LOG-IN',
-    isMe = 'AUTH/IS-ME',
-    register = 'AUTH/IS-REGISTER',
-    logOut = 'AUTH/LOG-OUT',
+  logIn = "AUTH/LOG-IN",
+  isMe = "AUTH/IS-ME",
+  register = "AUTH/IS-REGISTER",
+  sentToken = "AUTH/SET-TOKEN-IS-SENT",
+  sentPass = "AUTH/SET-SENT-PASS",
+  newPassword = "AUTH/NEW-PASSWORD",
+  passIsCreated = "AUTH/SET-PASS-IS-CREATED",
 }
 
-const initialState = {
-    isMe: false,
-    isRegister: false
-}
+type StateType = {
+  isMe: boolean;
+  tokenIsSent: boolean;
+  sentPassword: string;
+  passwordIsCreated: boolean;
+  isRegister: boolean;
+};
+
+const initialState: StateType = {
+  isMe: false,
+  isRegister: false,
+  tokenIsSent: false,
+  sentPassword: "",
+  passwordIsCreated: false,
+};
 
 export const authRed = (state: initialStateType = initialState, action: AuthRedActionType): initialStateType => {
     switch (action.type) {
         case EnumAuthRedActionType.isMe:
         case EnumAuthRedActionType.register:
         case EnumAuthRedActionType.logOut:
-            return {...state, ...action.payload}
-        default:
-            return {...state}
-    }
-}
+            return {...state, ...action.payload};
+    case EnumAuthRedActionType.sentToken:
+      return { ...state, tokenIsSent: action.value };
+    case EnumAuthRedActionType.sentPass:
+      return { ...state, sentPassword: action.value };
+    case EnumAuthRedActionType.passIsCreated:
+      return { ...state, passwordIsCreated: action.value };
+    default:
+      return { ...state };
+  }
+};
 
 // action creator
 const isMeAC = () => {
@@ -61,7 +87,6 @@ export const logInTC = (data: LogInArgsType): AppThunk => async dispatch => {
     }
 }
 export const isMeTC = (): AppThunk => async (dispatch) => {
-    dispatch(loadingAC(true))
     try {
         const response = await auth.me()
         dispatch(setProfile(response.data))
@@ -71,8 +96,6 @@ export const isMeTC = (): AppThunk => async (dispatch) => {
             const errorMessage = error.response.data.error;
             console.log(errorMessage)
         }
-    } finally {
-        dispatch(loadingAC(false))
     }
 }
 export const registerTC = (data: RegisterType): AppThunk => async dispatch => {
@@ -80,7 +103,7 @@ export const registerTC = (data: RegisterType): AppThunk => async dispatch => {
         const res = await auth.register(data)
         dispatch(registerAC())
     } catch (e: any) {
-        alert(e)
+      alert(e);
     }
 }
 export const logOutTC = (): AppThunk => async dispatch => {
@@ -93,10 +116,24 @@ export const logOutTC = (): AppThunk => async dispatch => {
     }
 }
 
+  export const setNewPassTC = (password: string, token: string="" ): AppThunk => async dispatch => {
+    try {
+        await auth.newPassword(password, token)
+            dispatch(setTokenIsSentAC(true))
+            dispatch(setPasswordIsCreatedAC(true))
+    } catch (e) {
 
+    }
+  }
 //type
 type initialStateType = typeof initialState
 export type AuthRedActionType =
     | ReturnType<typeof isMeAC>
     | ReturnType<typeof registerAC>
     | ReturnType<typeof logOutAC>
+  | ReturnType<typeof isMeAC>
+  | ReturnType<typeof RegisterAC>
+  | ReturnType<typeof setTokenIsSentAC>
+  | ReturnType<typeof setSentPassAC>
+  | ReturnType<typeof newPasswordAC>
+  | ReturnType<typeof setPasswordIsCreatedAC>

@@ -1,17 +1,7 @@
-import {
-  auth,
-  LogInArgsType,
-  PasswordRecoveryType,
-  ProfileType,
-  RegisterType,
-} from "../../m3-API/api";
-import { AppThunk } from "../store";
+import {auth, LogInArgsType, PasswordRecoveryType, RegisterType,} from "../../m3-API/api";
+import {AppThunk} from "../store";
 import axios from "axios";
-import { isLoggedIn, setProfile } from "./ProfileReducer";
-import {auth, LogInArgsType, RegisterType} from '../../m3-API/api';
-import {AppThunk} from '../store';
-import axios from 'axios';
-import {deleteProfile, setProfile} from './ProfileReducer';
+import {deleteProfile, setProfile} from "./ProfileReducer";
 import {loadingAC} from "./appReducer";
 
 enum EnumAuthRedActionType {
@@ -22,10 +12,7 @@ enum EnumAuthRedActionType {
   sentPass = "AUTH/SET-SENT-PASS",
   newPassword = "AUTH/NEW-PASSWORD",
   passIsCreated = "AUTH/SET-PASS-IS-CREATED",
-    logIn = 'AUTH/LOG-IN',
-    isMe = 'AUTH/IS-ME',
-    register = 'AUTH/IS-REGISTER',
-    logOut = 'AUTH/LOG-OUT',
+  logOut = 'AUTH/LOG-OUT',
 }
 
 type StateType = {
@@ -44,16 +31,6 @@ const initialState: StateType = {
   passwordIsCreated: false,
 };
 
-export const authRed = (state: initialStateType = initialState, action: AuthRedActionType): initialStateType => {
-    switch (action.type) {
-        case EnumAuthRedActionType.isMe:
-        case EnumAuthRedActionType.register:
-        case EnumAuthRedActionType.logOut:
-            return {...state, ...action.payload}
-        default:
-            return {...state}
-    }
-}
 export const authRed = (
   state: initialStateType = initialState,
   action: AuthRedActionType
@@ -68,6 +45,8 @@ export const authRed = (
       return { ...state, sentPassword: action.value };
     case EnumAuthRedActionType.passIsCreated:
       return { ...state, passwordIsCreated: action.value };
+      case EnumAuthRedActionType.logOut:
+          return {...state, ...action.payload}
     default:
       return { ...state };
   }
@@ -94,11 +73,11 @@ const logOutAC = () => {
             isRegister: false,
         },
     } as const
-}
+
   return {
     type: EnumAuthRedActionType.isMe,
     payload: { isMe: true },
-  } as const;
+  } as const
 };
 const RegisterAC = () => {
   return {
@@ -161,26 +140,16 @@ export const isMeTC = (): AppThunk => async (dispatch) => {
         }
     } finally {
         dispatch(loadingAC(false))
-  try {
-    const response = await auth.me();
-    dispatch(setProfile(response.data));
-    dispatch(isLoggedIn(true));
-  } catch (error) {
-    if (axios.isAxiosError(error) && error.response) {
-      const errorMessage = error.response.data.error;
-      console.log(errorMessage);
-    }
 }
-export const registerTC = (data: RegisterType): AppThunk => async dispatch => {
-  }
+
 };
-export const RegisterTC =
-  (data: RegisterType): AppThunk =>
+export const registerTC =
+    (data: RegisterType): AppThunk =>
   async (dispatch) => {
     try {
-        const res = await auth.register(data)
+        await auth.register(data)
         dispatch(registerAC())
-      const res = await auth.register(data);
+      await auth.register(data);
       dispatch(RegisterAC());
     } catch (e: any) {
       alert(e);
@@ -205,8 +174,8 @@ link</a>
     } catch (e: any) {
       alert(e);
     }
-  };
-}
+  }
+
 export const logOutTC = (): AppThunk => async dispatch => {
     try {
         const res = await auth.logOut()

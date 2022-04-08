@@ -13,6 +13,7 @@ export const Login = () => {
 
     //редирект на регистрацию, если нет профиля
     const goToRegisterHandler = () => navigate(routesPath.signUp)
+    const goToPasswordRecovery = () => navigate(routesPath.passwordRecovery)
 
     const formik = useFormik({
         initialValues: {
@@ -57,6 +58,7 @@ export const Login = () => {
             /> Запомнить<br/>
             <button type={'submit'}>Войти</button>
         </form>
+        <button onClick={goToPasswordRecovery}>Forgot your password?</button>
         <div>
             If you don't have a profile, then you need to register
             <button onClick={goToRegisterHandler}>Register</button>

@@ -1,12 +1,14 @@
 import {useFormik} from 'formik';
 import {RegisterType} from '../../../f1-main/m3-API/api';
 import {useDispatch, useSelector} from 'react-redux';
-import {AppRootStateType} from '../../../f1-main/m2-store/store';
+import {AppRootStateType, useAppSelector} from '../../../f1-main/m2-store/store';
 import {Navigate} from 'react-router-dom';
 import {routesPath} from '../../../f1-main/m1-ui/u2-routes/routesPath';
 import {registerTC} from '../../../f1-main/m2-store/reducers/authRed';
 
 export const SignUp = () => {
+
+    const LoggedIn = useAppSelector<boolean>(state => state.auth.isMe)
     const Register = useSelector<AppRootStateType, boolean>(
         (state) => state.auth.isRegister
     );
@@ -87,6 +89,7 @@ export const SignUp = () => {
                 <button type={'submit'}>Sign Up</button>
             </form>
             {Register && <Navigate to={routesPath.login}/>}
+            {LoggedIn && <Navigate to={routesPath.profile}/>}
         </div>
     );
 };

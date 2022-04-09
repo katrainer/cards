@@ -1,29 +1,26 @@
-
 import s from './ProfileUpdateForm.module.css'
-import {useDispatch} from "react-redux";
-import {useFormik} from "formik";
-import {updateTC} from "../../../f1-main/m2-store/reducers/ProfileReducer";
-import SuperInputText from "../../../f1-main/m1-ui/u3-common/c1-SuperInputText/SuperInputText";
-import SuperButton from "../../../f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton";
+import {useDispatch} from 'react-redux';
+import {useFormik} from 'formik';
+import {updateProfileTC} from '../../../f1-main/m2-store/reducers/ProfileReducer';
+import SuperInputText from '../../../f1-main/m1-ui/u3-common/c1-SuperInputText/SuperInputText';
+import SuperButton from '../../../f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton';
+import {useAppSelector} from '../../../f1-main/m2-store/store';
+import {ProfileType} from '../../../f1-main/m3-API/apiAuth';
 
 
 type PropsType = { setEditMode: (editMode: boolean) => void }
 
-// type ErrorType = {
-//     name?: string
-//     avatar?: string
-// }
-
 export const ProfileUpdateForm = ({setEditMode}: PropsType) => {
+    const profile = useAppSelector<ProfileType>(state => state.profile.profile)
     const dispatch = useDispatch();
     const formik = useFormik({
         initialValues: {
-            name: '',
-            avatar: '',
+            name: profile.name,
+            avatar: profile.avatar,
         },
         onSubmit: (values, {resetForm}) => {
             setEditMode(false)
-            dispatch(updateTC(values.name, values.avatar))
+            dispatch(updateProfileTC(values.name, values.avatar))
             resetForm();
         }
     })

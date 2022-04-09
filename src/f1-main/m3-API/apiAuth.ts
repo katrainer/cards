@@ -4,33 +4,34 @@ import {AxiosResponse} from 'axios';
 export const auth = {
     //Регистрация
     register(data: RegisterType) {
-        return instance.post('auth/register', {
-            ...data
-        }).then(res => res)
+        return instance.post('auth/register', {...data}).then(res => res.data)
     },
     //Войти (логин, в аргумент передаем сразу объект с данными)
     logIn(data: LogInArgsType) {
-        return instance.post<LogInArgsType, AxiosResponse<ProfileType>>('auth/login', data).then(res => res)
+        return instance.post<any, AxiosResponse<ProfileType>, LogInArgsType>('auth/login', data).then(res => res.data)
     },
     //проверка куки
     me() {
-        return instance.post<ProfileType>('auth/me', {}).then(res => res)
+        return instance.post<ProfileType>('auth/me', {}).then(res => res.data)
     },
     //Обновление имени или фото. По дефолту для фото задал стандартное значение (можно фото не предавать)
-    updateMe(name: string | undefined, avatar: string | undefined = 'https//avatar-url.img') {
-        return instance.put('auth/me', {name, avatar}).then(res => res)
+    updateMe(name: string, avatar: string = 'https//avatar-url.img') {
+        return instance.put('auth/me', {name, avatar}).then(res => res.data)
     },
     //Выйти (разлогивание)
     logOut() {
-        return instance.delete('auth/me').then(res => res)
+        return instance.delete('auth/me').then(res => res.data)
     },
     //Восстановление пароля
     passwordRecovery(data: PasswordRecoveryType) { //Типизация аргументов запроса могла сломать запрос:D
-        return instance.post<ForgotResponseType>('auth/forgot', data).then(res => res)
+        return instance.post('auth/forgot', data).then(res => res.data)
     },
     //Задаем новый пароль
-    newPassword(password: string, resetPasswordToken: string ) {//Чо за токен я хз
-        return instance.post<NewPassResponseType>('auth/set-new-password', {password, resetPasswordToken}).then(res => res)
+    newPassword(password: string, resetPasswordToken: string) {
+        return instance.post('auth/set-new-password', {
+            password,
+            resetPasswordToken
+        }).then(res => res.data)
     }
 }
 
@@ -59,7 +60,7 @@ export type ProfileType = {
     _id: string;
     email: string;
     name: string;
-    avatar?: string;
+    avatar: string;
     publicCardPacksCount: number;
     created: Date;
     updated: Date;
@@ -67,13 +68,4 @@ export type ProfileType = {
     verified: boolean;
     rememberMe: boolean;
     error?: string;
-};
-
-type ForgotResponseType = {
-    info: string
-    error: string
-    in: string
-}
-
-type NewPassResponseType = {
 }

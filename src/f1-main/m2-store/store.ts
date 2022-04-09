@@ -1,14 +1,14 @@
 import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import thunk, {ThunkAction} from 'redux-thunk';
-import {authRed, AuthRedActionType} from './reducers/authRed';
+import {authReducer, AuthRedActionType} from './reducers/authReducer';
 import {ProfileActionType, profileReducer} from './reducers/ProfileReducer';
 import {LoadingActionType, appReducer} from "./reducers/appReducer";
 
 
 const rootReducer = combineReducers({
-    auth: authRed,
-    profilePage: profileReducer,
+    auth: authReducer,
+    profile: profileReducer,
     app: appReducer
 })
 export const store = createStore(rootReducer, applyMiddleware(thunk))

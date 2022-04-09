@@ -1,13 +1,16 @@
 import {useFormik} from 'formik';
-import {LogInArgsType} from '../../../f1-main/m3-API/api';
-import {useDispatch, useSelector} from 'react-redux';
-import {logInTC} from '../../../f1-main/m2-store/reducers/authRed';
-import {AppRootStateType} from '../../../f1-main/m2-store/store';
+import {LogInArgsType} from '../../../f1-main/m3-API/apiAuth';
+import {useDispatch} from 'react-redux';
+import {useAppSelector} from '../../../f1-main/m2-store/store';
 import {Navigate, useNavigate} from 'react-router-dom';
 import {routesPath} from '../../../f1-main/m1-ui/u2-routes/routesPath';
+import {logInTC} from 'f1-main/m2-store/reducers/authReducer';
+import SuperInputText from '../../../f1-main/m1-ui/u3-common/c1-SuperInputText/SuperInputText';
+import SuperButton from '../../../f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton';
+import SuperCheckbox from '../../../f1-main/m1-ui/u3-common/c3-SuperCheckbox/SuperCheckbox';
 
 export const Login = () => {
-    const isMe = useSelector<AppRootStateType, boolean>(state => state.auth.isMe)
+    const isMe = useAppSelector<boolean>(state => state.auth.isMe)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -28,7 +31,7 @@ export const Login = () => {
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
                 errors.email = 'Invalid email address';
             }
-            if (values.password.length < 3) errors.password = 'The password is too short'
+            if (values.password.length < 7) errors.password = 'The password is too short'
             return errors;
         },
         onSubmit: (values: LogInArgsType) => {
@@ -37,31 +40,31 @@ export const Login = () => {
     })
     return <div>
         {isMe && <Navigate to={routesPath.profile}/>}
-        <h1>LOGIN</h1>
+        <h2>LOGIN</h2>
         <form onSubmit={formik.handleSubmit}>
-            <input id={'email'}
+            <SuperInputText id={'email'}
                    type={'email'}
                    placeholder={'email'}
                    {...formik.getFieldProps('email')}/>
             {formik.touched.email && formik.errors.email &&
                 <div style={{color: 'red'}}>{formik.errors.email}</div>}<br/>
-            <input id={'password'}
+            <SuperInputText id={'password'}
                    type={'password'}
                    placeholder={'password'}
                    {...formik.getFieldProps('password')}/>
             {formik.touched.password && formik.errors.password &&
                 <div style={{color: 'red'}}>{formik.errors.password}</div>}<br/>
-            <input id={'check'}
+            <SuperCheckbox id={'check'}
                    type={'checkbox'}
                    checked={formik.values.rememberMe}
                    {...formik.getFieldProps('rememberMe')}
             /> Запомнить<br/>
-            <button type={'submit'}>Войти</button>
+            <SuperButton type={'submit'}>Войти</SuperButton>
         </form>
-        <button onClick={goToPasswordRecovery}>Forgot your password?</button>
+        <SuperButton onClick={goToPasswordRecovery}>Forgot your password?</SuperButton>
         <div>
             If you don't have a profile, then you need to register
-            <button onClick={goToRegisterHandler}>Register</button>
+            <SuperButton onClick={goToRegisterHandler}>Register</SuperButton>
         </div>
     </div>
 }

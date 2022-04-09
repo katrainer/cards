@@ -7,12 +7,11 @@ import {useState} from 'react';
 import SuperButton from '../../f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton';
 import {Modal} from "../../f1-main/m1-ui/u3-common/modal/Modal";
 import {ProfileUpdateForm} from "./ProfileUpdateForm/ProfileUpdateForm";
-import {Pagination} from "../../f1-main/m1-ui/u3-common/pagination/Pagination";
 
 export const Profile = () => {
 
-    const avatar = useSelector<AppRootStateType, string | undefined>((state) => state.profilePage.profile.avatar)
-    const name = useSelector<AppRootStateType, string>((state) => state.profilePage.profile.name)
+    const avatar = useSelector<AppRootStateType, string | undefined>((state) => state.profile.profile.avatar)
+    const name = useSelector<AppRootStateType, string>((state) => state.profile.profile.name)
     const isAuth = useSelector<AppRootStateType, boolean>((state) => state.auth.isMe)
 
     const [editMode, setEditMode] = useState(false)
@@ -28,7 +27,6 @@ export const Profile = () => {
         <div> {name}</div>
         <SuperButton onClick={onClickEditMode}>Edit mode
         </SuperButton>
-        <Pagination/>
         <Modal editMode={editMode} setEditMode={setEditMode}>
             <ProfileUpdateForm setEditMode={setEditMode}/>
         </Modal>

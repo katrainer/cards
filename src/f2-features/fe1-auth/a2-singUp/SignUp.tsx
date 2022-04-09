@@ -1,32 +1,28 @@
 import {useFormik} from 'formik';
-import {RegisterType} from '../../../f1-main/m3-API/api';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppRootStateType, useAppSelector} from '../../../f1-main/m2-store/store';
-import {Navigate} from 'react-router-dom';
+import {RegisterType} from '../../../f1-main/m3-API/apiAuth';
+import {useDispatch} from 'react-redux';
+import {useAppSelector} from '../../../f1-main/m2-store/store';
+import {Navigate, useNavigate} from 'react-router-dom';
 import {routesPath} from '../../../f1-main/m1-ui/u2-routes/routesPath';
-import {registerTC} from '../../../f1-main/m2-store/reducers/authRed';
+import {singUpTC} from '../../../f1-main/m2-store/reducers/authReducer';
+import SuperButton from '../../../f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton';
+import SuperInputText from '../../../f1-main/m1-ui/u3-common/c1-SuperInputText/SuperInputText';
 
 export const SignUp = () => {
-
-    const LoggedIn = useAppSelector<boolean>(state => state.auth.isMe)
-    const Register = useSelector<AppRootStateType, boolean>(
-        (state) => state.auth.isRegister
-    );
-    const dispatch = useDispatch();
+    const isMe = useAppSelector<boolean>(state => state.auth.isMe)
+    const isRegister = useAppSelector<boolean>(state => state.auth.isRegister)
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const returnTiLoginHelper = () => {
+        navigate(routesPath.login)
+    }
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
-            firstName: '',
-            lastName: '',
         },
         validate: (values) => {
             const errors: FormikErrorType = {};
-            if (!values.firstName) {
-                errors.firstName = 'Required';
-            } else if (values.firstName.length < 3) {
-                errors.firstName = 'The name is too short';
-            }
             if (!values.email) {
                 errors.email = 'Required';
             } else if (
@@ -36,37 +32,21 @@ export const SignUp = () => {
             }
             if (!values.password) {
                 errors.password = 'Required';
-            } else if (values.password.length < 4) {
+            } else if (values.password.length < 7) {
                 errors.password = 'The password is too short';
             }
             return errors;
         },
         onSubmit: (values: RegisterType) => {
-            dispatch(registerTC(values));
+            dispatch(singUpTC(values));
         },
     });
 
     return (
         <div>
+            <h2>Sing Up</h2>
             <form onSubmit={formik.handleSubmit}>
-                <input
-                    id={'firstName'}
-                    type={'text'}
-                    placeholder={'First Name'}
-                    {...formik.getFieldProps('firstName')}
-                />
-                {formik.errors.firstName && formik.touched.firstName ? (
-                    <div>{formik.errors.firstName}</div>
-                ) : null}
-                <br/>
-                <input
-                    id={'lastName'}
-                    type={'text'}
-                    placeholder={'Last Name'}
-                    {...formik.getFieldProps('lastName')}
-                />{' '}
-                <br/>
-                <input
+                <SuperInputText
                     id={'email'}
                     type={'email'}
                     placeholder={'email'}
@@ -86,10 +66,13 @@ export const SignUp = () => {
                     <div>{formik.errors.password}</div>
                 ) : null}
                 <br/>
-                <button type={'submit'}>Sign Up</button>
+                <SuperButton type={'submit'}>Sign Up</SuperButton>
             </form>
-            {Register && <Navigate to={routesPath.login}/>}
-            {LoggedIn && <Navigate to={routesPath.profile}/>}
+            <div>
+                <SuperButton onClick={returnTiLoginHelper}>Return to login</SuperButton>
+            </div>
+            {isMe && <Navigate to={routesPath.login}/>}
+            {isRegister && <Navigate to={routesPath.login}/>}
         </div>
     );
 };
@@ -97,5 +80,4 @@ export const SignUp = () => {
 type FormikErrorType = {
     email?: string;
     password?: string;
-    firstName?: string;
 };

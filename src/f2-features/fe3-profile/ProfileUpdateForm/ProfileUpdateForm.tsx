@@ -2,9 +2,9 @@
 import s from './ProfileUpdateForm.module.css'
 import {useDispatch} from "react-redux";
 import {useFormik} from "formik";
-import {updateTC} from "../../../m2-store/reducers/ProfileReducer";
-import SuperInputText from "../c1-SuperInputText/SuperInputText";
-import SuperButton from "../c2-SuperButton/SuperButton";
+import {updateTC} from "../../../f1-main/m2-store/reducers/ProfileReducer";
+import SuperInputText from "../../../f1-main/m1-ui/u3-common/c1-SuperInputText/SuperInputText";
+import SuperButton from "../../../f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton";
 
 
 type PropsType = { setEditMode: (editMode: boolean) => void }

@@ -38,17 +38,17 @@ export const authRed = (
     switch (action.type) {
         case EnumAuthRedActionType.isMe:
         case EnumAuthRedActionType.register:
-            return { ...state, ...action.payload };
+            return {...state, ...action.payload};
         case EnumAuthRedActionType.sentToken:
-            return { ...state, tokenIsSent: action.value };
+            return {...state, tokenIsSent: action.value};
         case EnumAuthRedActionType.sentPass:
-            return { ...state, sentPassword: action.value };
+            return {...state, sentPassword: action.value};
         case EnumAuthRedActionType.passIsCreated:
-            return { ...state, passwordIsCreated: action.value };
+            return {...state, passwordIsCreated: action.value};
         case EnumAuthRedActionType.logOut:
             return {...state, ...action.payload}
         default:
-            return { ...state };
+            return {...state};
     }
 };
 
@@ -76,13 +76,13 @@ const logOutAC = () => {
 
     return {
         type: EnumAuthRedActionType.isMe,
-        payload: { isMe: true },
+        payload: {isMe: true},
     } as const
 };
 const RegisterAC = () => {
     return {
         type: EnumAuthRedActionType.register,
-        payload: { isRegister: true },
+        payload: {isRegister: true},
     } as const;
 };
 
@@ -149,8 +149,6 @@ export const registerTC =
             try {
                 await auth.register(data)
                 dispatch(registerAC())
-                await auth.register(data);
-                dispatch(RegisterAC());
             } catch (e: any) {
                 alert(e);
             }
@@ -186,7 +184,7 @@ export const logOutTC = (): AppThunk => async dispatch => {
     }
 }
 
-export const setNewPassTC = (password: string, token: string="" ): AppThunk => async dispatch => {
+export const setNewPassTC = (password: string, token: string = ""): AppThunk => async dispatch => {
     try {
         await auth.newPassword(password, token)
         dispatch(setTokenIsSentAC(true))

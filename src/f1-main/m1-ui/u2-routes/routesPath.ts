@@ -7,4 +7,5 @@ export const routesPath = {
     profile: '/profile',
     error: '/*',
     test: '/test',
+    card: '/card'
 }

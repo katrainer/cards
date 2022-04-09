@@ -7,7 +7,6 @@ export type PropsType = {
     setEditMode: (editMode: boolean) => void
 }
 export const Modal: FC<PropsType> = ({editMode, setEditMode, children}) => {
-
     return (
         <div className={editMode ? `${s.modal} ${s.active}` : s.modal} onClick={() => setEditMode(false)}>
             <div className={editMode ? `${s.modal__content} ${s.active}` : s.modal__content}>

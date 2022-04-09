@@ -24,6 +24,7 @@ export const Header = () => {
             <NavLink className={s.navLinkItem} to={routesPath.profile}>Profile </NavLink>
             <NavLink className={s.navLinkItem} to={routesPath.error}>Error </NavLink>
             <NavLink className={s.navLinkItem} to={routesPath.test}>Test </NavLink>
+            <NavLink className={s.navLinkItem} to={routesPath.card}>Card </NavLink>
             {isMe && <button onClick={logOutHandler}>Log Out</button>}
         </div>
         <hr/>

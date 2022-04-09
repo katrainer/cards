@@ -13,9 +13,10 @@ import {Header} from './m1-ui/u1-header/Header';
 import s from './App.module.css'
 import {useDispatch} from 'react-redux';
 import {isMeTC} from './m2-store/reducers/authRed';
-import { CheckEmail } from 'f2-features/fe1-auth/a3-passwordRecovery/CheckEmail';
+import {CheckEmail} from 'f2-features/fe1-auth/a3-passwordRecovery/CheckEmail';
 import {useAppSelector} from "./m2-store/store";
-import Preloader from "./m1-ui/u3-common/Preloader/Preloader";
+import Preloader from "./m1-ui/u3-common/preloader/Preloader";
+import {Card} from "../f2-features/card/Сard";
 
 function App() {
 
@@ -40,6 +41,7 @@ function App() {
                 <Route path={routesPath.profile} element={<Profile/>}/>
                 <Route path={routesPath.error} element={<Error/>}/>
                 <Route path={routesPath.test} element={<Test/>}/>
+                <Route path={routesPath.card} element={<Card/>}/>
             </Routes>
         </div>
     )

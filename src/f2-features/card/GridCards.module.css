@@ -1,0 +1,19 @@
+.block {
+    display: flex;
+    text-align: start;
+    align-items: center;
+    height: 60px;
+}
+
+.question {
+    width: 250px;
+}
+.answer {
+    width: 250px;
+}
+.lastUpdated {
+    width: 200px;
+}
+.grade {
+    width: 100px;
+}

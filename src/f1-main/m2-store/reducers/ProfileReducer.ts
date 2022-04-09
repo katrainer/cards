@@ -1,10 +1,13 @@
-import {auth, ProfileType} from "f1-main/m3-API/api"
-import {AppThunk} from "../store";
-import axios from "axios";
-import {loadingAC} from "./appReducer";
+import {auth, ProfileType} from 'f1-main/m3-API/apiAuth'
+import {AppThunk} from '../store';
+import axios from 'axios';
+import {loadingAC} from './appReducer';
 
-type initialStateType = typeof initialState
-
+enum EnumProfileActionType {
+    setProfile = 'PROFILE/SET-PROFILE',
+    updateProfile = 'PROFILE/UPDATE-PROFILE',
+    deleteProfile = 'PROFILE/DELETE-PROFILE',
+}
 
 const initialState = {
     profile: {} as ProfileType,
@@ -12,61 +15,60 @@ const initialState = {
 
 export const profileReducer = (state: initialStateType = initialState, action: ProfileActionType): initialStateType => {
     switch (action.type) {
-        case 'SET_PROFILE':
+        case EnumProfileActionType.setProfile:
             return {...state, ...action.payload}
-        case 'UPDATE_PROFILE':
+        case EnumProfileActionType.updateProfile:
             return {...state, profile: {...state.profile, ...action.payload}}
-        case 'DELETE-PROFILE':
+        case EnumProfileActionType.deleteProfile:
             return {...state, profile: action.payload}
         default:
             return {...state}
     }
 }
 
-// action creator
-export type ProfileActionType =
-    | ReturnType<typeof setProfile>
-    | ReturnType<typeof updateProfile>
-    | ReturnType<typeof deleteProfile>
-
-export const setProfile = (profile: ProfileType) => {
+//action
+export const setProfileAC = (profile: ProfileType) => {
     return {
-        type: 'SET_PROFILE',
-        payload:{ profile}
+        type: EnumProfileActionType.setProfile,
+        payload: {profile}
     } as const
 }
-
-export const updateProfile = (name: string, avatar: string) => {
+export const updateProfileAC = (name: string, avatar: string) => {
     return {
-        type: 'UPDATE_PROFILE',
+        type: EnumProfileActionType.updateProfile,
         payload: {
             name,
             avatar,
         }
     } as const
 }
-export const deleteProfile = () => {
+export const deleteProfileAC = () => {
     return {
-        type: 'DELETE-PROFILE',
+        type: EnumProfileActionType.deleteProfile,
         payload: {} as ProfileType
     } as const
 }
 
-
-//thunk creator
-
-export const updateTC = (name?: string | undefined, avatar?: string | undefined): AppThunk => async (dispatch) => {
+//thunk
+export const updateProfileTC = (name: string, avatar: string): AppThunk => async dispatch => {
     dispatch(loadingAC(true))
     try {
-        const response = await auth.updateMe(name, avatar)
-        dispatch(updateProfile(response.data.updatedUser.name, response.data.updatedUser.avatar))
-    } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-            const errorMessage = error.response.data.error;
-            console.log(errorMessage)
+        const res = await auth.updateMe(name, avatar)
+        dispatch(updateProfileAC(res.updatedUser.name, res.updatedUser.avatar))
+    } catch (e) {
+        if (axios.isAxiosError(e) && e.response) {
+            const errorMessage = e.response.data.error;
+            alert(errorMessage)
         }
     } finally {
         dispatch(loadingAC(false))
     }
-
 }
+
+
+//type
+type initialStateType = typeof initialState
+export type ProfileActionType =
+    | ReturnType<typeof setProfileAC>
+    | ReturnType<typeof updateProfileAC>
+    | ReturnType<typeof deleteProfileAC>

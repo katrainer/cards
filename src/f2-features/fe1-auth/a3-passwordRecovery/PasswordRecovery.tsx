@@ -1,63 +1,55 @@
-import React from "react";
-import { useFormik } from "formik";
-import { useDispatch, useSelector } from "react-redux";
-import { sendTokenTC, setTokenIsSentAC } from "f1-main/m2-store/reducers/authRed";
-import { AppRootStateType, useAppSelector } from "f1-main/m2-store/store";
-import { PasswordRecoveryType } from "f1-main/m3-API/api";
-import { Navigate } from "react-router-dom";
+import React from 'react';
+import {useFormik} from 'formik';
+import {useDispatch} from 'react-redux';
+import {sendTokenTC} from 'f1-main/m2-store/reducers/authReducer';
+import {useAppSelector} from 'f1-main/m2-store/store';
+import {Navigate} from 'react-router-dom';
+import SuperButton from '../../../f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton';
+import SuperInputText from '../../../f1-main/m1-ui/u3-common/c1-SuperInputText/SuperInputText';
+import {routesPath} from 'f1-main/m1-ui/u2-routes/routesPath';
 
 export const PasswordRecovery = () => {
     const dispatch = useDispatch()
-    const sentPassword = useAppSelector<string>(state => state.auth.sentPassword)
-    const isLoggedIn = useAppSelector<boolean>(state => state.auth.isMe)
-
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-    },
-    validate: (values) => {
-      const errors: FormikErrorType = {};
-      if (!values.email) {
-        errors.email = "Required";
-      } else if (
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-      ) {
-        errors.email = "Invalid email address";
-      }
-      return errors;
-    },
-    onSubmit: (values: { email:string}) => {
-      dispatch(sendTokenTC(values.email));
-    },
-  });
-  
-  if (sentPassword) {
-    dispatch(setTokenIsSentAC(false))
-    return <Navigate to={'/checkEmail'}/>
+    const isMe = useAppSelector<boolean>(state => state.auth.isMe)
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+        },
+        validate: (values) => {
+            const errors: FormikErrorType = {}
+            if (!values.email) {
+                errors.email = 'Required'
+            } else if (
+                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+            ) {
+                errors.email = 'Invalid email address'
+            }
+            return errors
+        },
+        onSubmit: (values: { email: string }) => {
+            dispatch(sendTokenTC(values.email))
+        }
+    })
+    if (isMe) return <Navigate to={routesPath.login}/>
+    return (
+        <div>
+            <h2>Passport restoration</h2>
+            <form onSubmit={formik.handleSubmit}>
+                <SuperInputText
+                    id={'email'}
+                    type={'email'}
+                    placeholder={'email'}
+                    {...formik.getFieldProps('email')}
+                />
+                {formik.errors.email && formik.touched.email ? (
+                    <div>{formik.errors.email}</div>
+                ) : null}
+                <br/>
+                <SuperButton type={'submit'}>Reset password</SuperButton>
+            </form>
+        </div>
+    )
 }
-if (isLoggedIn) {
-    return <Navigate to={'/profile'}/>
-}
-
-  return (
-  <div>
-        <h1>Remove password</h1>
-      <form onSubmit={formik.handleSubmit}>
-        <input
-          id={"email"}
-          type={"email"}
-          placeholder={"email"}
-          {...formik.getFieldProps("email")}
-        />
-        {formik.errors.email && formik.touched.email ? (
-          <div>{formik.errors.email}</div>
-        ) : null}
-        <br />
-        <button type={"submit"}>Reset password</button>
-      </form>
-    </div>
-  );
-};
 type FormikErrorType = {
-  email?: string;
+    email?: string;
 };

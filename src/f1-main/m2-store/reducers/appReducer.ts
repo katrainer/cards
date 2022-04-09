@@ -1,5 +1,6 @@
-type initialStateType = typeof initialState
-
+enum EnumAppReducerActionType {
+    loading = 'APP/LOADING'
+}
 
 const initialState = {
     isLoading: true
@@ -7,18 +8,23 @@ const initialState = {
 
 export const appReducer = (state: initialStateType = initialState, action: LoadingActionType): initialStateType => {
     switch (action.type) {
-        case 'IS_LOADING':
+        case EnumAppReducerActionType.loading:
             return {...state, ...action.payload}
         default:
             return {...state}
     }
 }
 
-export type LoadingActionType = ReturnType<typeof loadingAC>
-
+//action
 export const loadingAC = (isLoading: boolean) => {
     return {
-        type: 'IS_LOADING',
+        type: EnumAppReducerActionType.loading,
         payload: {isLoading}
     } as const
 }
+
+//thunk
+
+//type
+type initialStateType = typeof initialState
+export type LoadingActionType = ReturnType<typeof loadingAC>

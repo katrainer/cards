@@ -6,12 +6,12 @@ import {Navigate} from 'react-router-dom';
 import {useState} from 'react';
 import SuperButton from '../../f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton';
 import {Modal} from "../../f1-main/m1-ui/u3-common/modal/Modal";
-import {ProfileUpdateForm} from "../../f1-main/m1-ui/u3-common/ProfileUpdateForm/ProfileUpdateForm";
+import {ProfileUpdateForm} from "./ProfileUpdateForm/ProfileUpdateForm";
 
 export const Profile = () => {
 
-    const avatar = useSelector<AppRootStateType, string | undefined>((state) => state.profilePage.profile.avatar)
-    const name = useSelector<AppRootStateType, string>((state) => state.profilePage.profile.name)
+    const avatar = useSelector<AppRootStateType, string | undefined>((state) => state.profile.profile.avatar)
+    const name = useSelector<AppRootStateType, string>((state) => state.profile.profile.name)
     const isAuth = useSelector<AppRootStateType, boolean>((state) => state.auth.isMe)
 
     const [editMode, setEditMode] = useState(false)

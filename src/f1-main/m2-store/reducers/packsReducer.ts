@@ -4,7 +4,8 @@ import axios from 'axios';
 
 enum EnumPacksReducerActionType {
     setPacks = 'PACKS/SET-PACKS',
-    changeRequestStatusType = 'PACKS/CHANGE-REQUEST-STATUS-TYPE'
+    changeRequestStatusType = 'PACKS/CHANGE-REQUEST-STATUS-TYPE',
+    setTotalPacks = 'PACKS/SET-TOTAL-PACKS'
 }
 
 const initialState = {
@@ -18,14 +19,14 @@ const initialState = {
         page: 1,
         pageCount: 4,
     } as getPacksDataType,
+    cardPacksTotalCount: 0
 }
 
 export const packsReducer = (state: initialStateType = initialState, action: PacksReducerActionType): initialStateType => {
     switch (action.type) {
         case EnumPacksReducerActionType.setPacks:
-            // return {...state, ...action.payload}
-            return {...state, packs: action.packs}
         case EnumPacksReducerActionType.changeRequestStatusType:
+        case EnumPacksReducerActionType.setTotalPacks:
             return {...state, ...action.payload}
         default:
             return {...state}
@@ -36,8 +37,7 @@ export const packsReducer = (state: initialStateType = initialState, action: Pac
 const setPacksAC = (packs: PackType[]) => {
     return {
         type: EnumPacksReducerActionType.setPacks,
-        packs
-        // payload: {packs}
+        payload: {packs},
     } as const
 }
 const changeRequestStatusAC = (requestStatus: RequestStatusType) => {
@@ -46,6 +46,12 @@ const changeRequestStatusAC = (requestStatus: RequestStatusType) => {
         payload: {requestStatus}
     } as const
 }
+const setTotalPacks = (cardPacksTotalCount: number) => {
+    return {
+        type: EnumPacksReducerActionType.setTotalPacks,
+        payload: {cardPacksTotalCount}
+    }
+}
 
 //thunk
 export const getAllPacks = (): AppThunk => async (dispatch, getState) => {
@@ -53,6 +59,7 @@ export const getAllPacks = (): AppThunk => async (dispatch, getState) => {
     try {
         const res = await packs.getPacks(data)
         dispatch(setPacksAC(res.cardPacks))
+        dispatch(setTotalPacks(res.cardPacksTotalCount))
         dispatch(changeRequestStatusAC('succeeded'))
     } catch (e) {
         if (axios.isAxiosError(e) && e.response) {
@@ -68,4 +75,5 @@ type initialStateType = typeof initialState
 export type PacksReducerActionType =
     | ReturnType<typeof setPacksAC>
     | ReturnType<typeof changeRequestStatusAC>
+    | ReturnType<typeof setTotalPacks>
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'

@@ -1,5 +1,7 @@
 import SuperButton from 'f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton';
 import React from 'react';
+import s from './Pack.module.css'
+
 
 type PackPropsType = {
     name: string
@@ -7,8 +9,8 @@ type PackPropsType = {
     update: string
 }
 export const Pack: React.FC<PackPropsType> = ({name, cardsCount, update}) => {
-    return <>
-        <span>{name}</span>
+    return <div className={s.container}>
+        <span >{name}</span>
         <span>{cardsCount}</span>
         <span>{update}</span>
         <span>
@@ -16,5 +18,5 @@ export const Pack: React.FC<PackPropsType> = ({name, cardsCount, update}) => {
             <SuperButton>Edite</SuperButton>
             <SuperButton>Learn</SuperButton>
         </span>
-    </>
+    </div>
 }

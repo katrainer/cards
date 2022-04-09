@@ -2,7 +2,7 @@ import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import thunk, {ThunkAction} from 'redux-thunk';
 import {authReducer, AuthRedActionType} from './reducers/authReducer';
-import {ProfileActionType, profileReducer} from './reducers/ProfileReducer';
+import {ProfileActionType, profileReducer} from './reducers/profileReducer';
 import {LoadingActionType, appReducer} from './reducers/appReducer';
 import {packsReducer, PacksReducerActionType} from './reducers/packsReducer';
 

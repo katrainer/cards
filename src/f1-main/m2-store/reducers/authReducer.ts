@@ -1,7 +1,7 @@
 import {auth, LogInArgsType, PasswordRecoveryType, RegisterType,} from '../../m3-API/apiAuth';
 import {AppThunk} from '../store';
 import axios from 'axios';
-import {deleteProfileAC, setProfileAC} from './ProfileReducer';
+import {deleteProfileAC, setProfileAC} from './profileReducer';
 import {loadingAC} from './appReducer';
 
 enum EnumAuthReducerActionType {

@@ -1,0 +1,7 @@
+.container {
+    display: flex;
+}
+.container span {
+    border: solid 1px;
+    width: 200px;
+}

@@ -14,7 +14,7 @@ export type getPacksDataType = {
     max?: number
     sortPacks?: '1update' | '0update'
     page?: number
-    pageCount?: number
+    pageCount: number
 }
 
 type getPacksResponseType = {

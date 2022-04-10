@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
-import {Route, Routes, Navigate} from 'react-router-dom';
-import './App.module.css';
+import {Navigate, Route, Routes} from 'react-router-dom';
+import s from './App.module.css'
 import {Login} from '../f2-features/fe1-auth/a1-login/Login';
 import {SignUp} from '../f2-features/fe1-auth/a2-singUp/SignUp';
 import {Profile} from '../f2-features/fe3-profile/Profile';
@@ -10,12 +10,12 @@ import {Error} from '../f2-features/fe4-error/Error';
 import {Test} from '../f2-features/fe0-test/Test';
 import {routesPath} from './m1-ui/u2-routes/routesPath';
 import {Header} from './m1-ui/u1-header/Header';
-import s from './App.module.css'
 import {useDispatch} from 'react-redux';
-import {useAppSelector} from "./m2-store/store";
-import Preloader from "./m1-ui/u3-common/preloader/Preloader";
-import {Cards} from "../f2-features/card/Сards";
 import {isMeTC} from './m2-store/reducers/authReducer';
+import {useAppSelector} from './m2-store/store';
+import Preloader from "./m1-ui/u3-common/c5-Preloader/Preloader";
+import {AllPacks} from "../f2-features/fe5-allPacks/AllPacks";
+import {Cards} from "../f2-features/card/Сards";
 
 function App() {
 
@@ -39,6 +39,7 @@ function App() {
                 <Route path={routesPath.profile} element={<Profile/>}/>
                 <Route path={routesPath.error} element={<Error/>}/>
                 <Route path={routesPath.test} element={<Test/>}/>
+                <Route path={routesPath.allPacks} element={<AllPacks/>}/>
                 <Route path={routesPath.card} element={<Cards/>}/>
             </Routes>
         </div>

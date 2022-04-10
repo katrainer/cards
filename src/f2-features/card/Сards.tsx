@@ -1,9 +1,8 @@
 import React from 'react';
 import SuperInputText from "../../f1-main/m1-ui/u3-common/c1-SuperInputText/SuperInputText";
-import {Pagination} from "../../f1-main/m1-ui/u3-common/pagination/Pagination";
 import {GridCards} from "./GridCards";
-import {StarRating} from "../../f1-main/m1-ui/u3-common/starRating/StarRating";
-import {formatDate} from "../../f1-main/m4-utils/formatDate";
+import {formatDate} from "f1-main/m4-utils/formatDate";
+import {Paginator} from "../../f1-main/m1-ui/u3-common/c7-Paginator/Paginator";
 
 export const Cards = () => {
     const resCards = {
@@ -112,7 +111,7 @@ export const Cards = () => {
                 <GridCards question={'Question'} answer={'Answer'} lastUpdated={'Last Updated'} grade={'Grade'}/>
                 {newCards}
             </div>
-            <Pagination/>
+            <Paginator totalCount={100} pageCount={10} callback={()=>{}}/>
         </div>
     );
 };

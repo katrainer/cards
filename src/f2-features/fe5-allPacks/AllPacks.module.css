@@ -1,0 +1,8 @@
+.goFlex {
+    display: flex;
+    justify-content: center;
+}
+.bottomContainer{
+    display: flex;
+    justify-content: space-around;
+}

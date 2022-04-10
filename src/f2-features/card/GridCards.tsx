@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import s from './GridCards.module.css'
-import {StarRating} from "../../f1-main/m1-ui/u3-common/starRating/StarRating";
+import {StarRating} from "../../f1-main/m1-ui/u3-common/c9-starRating/StarRating";
 
 type PropsType = {
     question: string

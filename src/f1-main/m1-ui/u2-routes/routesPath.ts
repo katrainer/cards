@@ -6,5 +6,6 @@ export const routesPath = {
     profile: '/profile',
     error: '/*',
     test: '/test',
-    card: '/card'
+    card: '/card',
+    allPacks: '/allPacks',
 }

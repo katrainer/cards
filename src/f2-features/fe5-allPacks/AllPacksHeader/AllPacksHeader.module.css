@@ -1,0 +1,9 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.container span {
+    border: solid 1px black;
+    width: 200px;
+}

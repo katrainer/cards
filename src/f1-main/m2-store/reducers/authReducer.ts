@@ -83,7 +83,7 @@ export const isMeTC = (): AppThunk => async dispatch => {
     } catch (e) {
         if (axios.isAxiosError(e) && e.response) {
             const errorMessage = e.response.data.error;
-            console.log(errorMessage)
+            console.error(errorMessage)
         }
     } finally {
         dispatch(loadingAC(false))

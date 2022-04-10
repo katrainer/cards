@@ -1,25 +1,21 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './Pagination.module.css'
-import SuperButton from '../c2-SuperButton/SuperButton';
 
 type PaginatorPropsType = {
     totalCount: number
     pageCount: number
+    callback: () => void
 }
 
 export const Paginator: React.FC<PaginatorPropsType> =
     React.memo(({
                     totalCount,
-                    pageCount
+                    pageCount,
+                    callback,
                 }) => {
         const [currentPage, setCurrentPage] = useState(1)
         const totalPages = Math.ceil(totalCount / pageCount)
         const pages = [] as number[]
-        const allPages = [] as number[]
-
-        for (let i = 1; i <= totalPages; i++) {
-            allPages.push(i)
-        }
 
         function createPages(pages: number[], pagesCount: number, currentPage: number) {
             if (pagesCount > 10) {
@@ -46,15 +42,21 @@ export const Paginator: React.FC<PaginatorPropsType> =
         const toFirstPage = () => setCurrentPage(1)
         const toLastPage = () => setCurrentPage(totalPages)
 
+        useEffect(() => {
+            callback()
+        }, [currentPage])
+
         return (
             <div>
                 <div className={s.pages}>
-                    <SuperButton onClick={toFirstPage}>1</SuperButton>
+                    <span onClick={toFirstPage}> {'<<'} </span>
+                    <span onClick={() => setCurrentPage(currentPage - 1)}>{'<'} </span>
                     {pages.map((page, index) => <span
                         key={index}
                         className={currentPage === page ? s.currentPage : s.page}
                         onClick={() => setCurrentPage(page)}>{page} </span>)}
-                    <SuperButton onClick={toLastPage}>{totalPages}</SuperButton>
+                    <span onClick={() => setCurrentPage(currentPage + 1)}> {'>'} </span>
+                    <span onClick={toLastPage}>{'>>'} </span>
                 </div>
             </div>
         );

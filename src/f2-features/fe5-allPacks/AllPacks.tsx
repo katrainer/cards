@@ -34,6 +34,10 @@ export const AllPacks = () => {
 
     }, [])
 
+    const currentPageHelper = useCallback(() => {
+
+    }, [])
+
     useEffect(() => {
         dispatch(getAllPacks())
     }, [requestPacksData])
@@ -54,7 +58,7 @@ export const AllPacks = () => {
                 </div>
             </div>
             <div>
-                <Paginator totalCount={totalCount} pageCount={pageCount}/>
+                <Paginator totalCount={totalCount} pageCount={pageCount} callback={currentPageHelper}/>
                 <div className={s.goFlex}>
                     <SuperSelect
                         options={arr}

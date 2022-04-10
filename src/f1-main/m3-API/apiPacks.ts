@@ -9,9 +9,9 @@ export const packs = {
 }
 //type
 export type getPacksDataType = {
-    packName?: string
-    min?: number
-    max?: number
+    packName: string
+    min: number
+    max: number
     sortPacks?: '1update' | '0update'
     page?: number
     pageCount: number

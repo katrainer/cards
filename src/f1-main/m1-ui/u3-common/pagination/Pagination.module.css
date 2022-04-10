@@ -1,5 +1,7 @@
 .pages {
     margin: 20px 0;
+    cursor: pointer;
+    user-select: none;
 }
 .page .currentPage{
     border: 1px solid lightgray;

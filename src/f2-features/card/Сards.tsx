@@ -2,8 +2,10 @@ import React from 'react';
 import SuperInputText from "../../f1-main/m1-ui/u3-common/c1-SuperInputText/SuperInputText";
 import {Pagination} from "../../f1-main/m1-ui/u3-common/pagination/Pagination";
 import {GridCards} from "./GridCards";
+import {StarRating} from "../../f1-main/m1-ui/u3-common/starRating/StarRating";
+import {formatDate} from "../../f1-main/m4-utils/formatDate";
 
-export const Card = () => {
+export const Cards = () => {
     const resCards = {
         cards: [
             {
@@ -95,22 +97,11 @@ export const Card = () => {
         pageCount: 4,
         packUserId: "5eecf82a3ed8f700042f1186",
     }
-const formatDate = (dates: string) => {
-    const date1 = new Date(dates);
-    let date = date1.getDate();
-    if (date < 10) date = Number('0' + date);
-    let month = date1.getMonth();
-    if (month < 10) month = Number('0' + month);
-    let year = date1.getFullYear();
-    let result = date + '.' + month + '.' + year;
-    return result
-}
-
-    console.log(formatDate("2020-05-13T11:05:44.867Z"))
 
 
-    const newCards = resCards.cards.map(t=> <GridCards
-    question={t.question} answer={t.answer} lastUpdated={formatDate(t.updated)} grade={t.grade}/>)
+    const newCards = resCards.cards.map((t, i) => <GridCards key={i}
+                                                             question={t.question} answer={t.answer}
+                                                             lastUpdated={formatDate(t.updated)} grade={t.grade}/>)
     return (
         <div>
             <h1>Pack Name</h1>

@@ -1,5 +1,6 @@
 import React, {FC} from "react";
 import s from './GridCards.module.css'
+import {StarRating} from "../../f1-main/m1-ui/u3-common/starRating/StarRating";
 
 type PropsType = {
     question: string
@@ -25,7 +26,7 @@ export const GridCards: FC<PropsType> = ({
                         {lastUpdated}
                     </span>
             <span className={s.grade}>
-                        {grade}
+                        {typeof grade === 'string' ? grade : <StarRating value={grade}/>}
                     </span>
         </div>
     )

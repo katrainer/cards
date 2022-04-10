@@ -2,7 +2,6 @@ import React, {ChangeEvent, useState} from 'react';
 import s from './Pagination.module.css'
 import {useDispatch} from "react-redux";
 import SuperSelect from "../SuperSelect";
-import SuperButton from "../c2-SuperButton/SuperButton";
 
 export const Pagination = () => {
     const dispatch = useDispatch()
@@ -10,7 +9,7 @@ export const Pagination = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [perPage, setPerPage] = useState(5)
     const pagesCount = Math.ceil(totalCount / perPage)
-    const perPage1 = [5,10,15,20] as number[]
+    const perPage1 = [5, 10, 15, 20] as number[]
     const pages = [] as number[]
     const allPages = [] as number[]
 
@@ -43,15 +42,18 @@ export const Pagination = () => {
     return (
         <div>
             <div className={s.pages}>
-                <SuperButton onClick={()=>setCurrentPage(1)}>1</SuperButton>
+                <span onClick={() => setCurrentPage(1)}> {'<<'} </span>
+                <span onClick={() => setCurrentPage(currentPage - 1)}> {'<'} </span>
                 {pages.map((page, index) => <span
                     key={index}
                     className={currentPage === page ? s.currentPage : s.page}
                     onClick={() => setCurrentPage(page)}>{page} </span>)}
+                <span onClick={() => setCurrentPage(currentPage + 1)}> {'>'} </span>
+                <span onClick={() => setCurrentPage(pagesCount)}> {'>>'} </span>
                 <span className={s.selectPage}>Show
                     <SuperSelect value={perPage} options={perPage1} onChange={(e) => {
                         setPerPage(+e.currentTarget.value)
-                }}>{currentPage}</SuperSelect> Cards per Page</span>
+                    }}>{currentPage}</SuperSelect> Cards per Page</span>
             </div>
         </div>
     );

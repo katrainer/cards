@@ -10,7 +10,7 @@ type PackPropsType = {
 }
 export const Pack: React.FC<PackPropsType> = ({name, cardsCount, update}) => {
     return <div className={s.container}>
-        <span >{name}</span>
+        <span>{name}</span>
         <span>{cardsCount}</span>
         <span>{update}</span>
         <span>

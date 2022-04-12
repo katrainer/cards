@@ -9,6 +9,7 @@ import {Modal} from "../../f1-main/m1-ui/u3-common/c4-modal/Modal";
 import {Card} from "./card/Card";
 import {CardsUpdateForm} from "./CardsUpdateForm/CardsUpdateForm";
 import {useLocation} from "react-router-dom";
+import {HeaderCard} from "./card/HeaderCards";
 
 export const Cards: FC = () => {
     const [editMode, setEditMode] = useState(false)
@@ -52,7 +53,7 @@ export const Cards: FC = () => {
                 </Modal>
             </div>
             <div>
-                <Card/>
+                <HeaderCard/>
                 {newCards}
             </div>
         </div>

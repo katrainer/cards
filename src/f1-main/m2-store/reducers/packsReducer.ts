@@ -12,7 +12,7 @@ const initialState = {
     packs: [] as PackType[],
     requestStatus: 'idle' as RequestStatusType,
     requestPacksData: {
-        packName: 'english',
+        packName: '',
         min: 3,
         max: 9,
         sortPacks: '0update',

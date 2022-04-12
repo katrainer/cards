@@ -5,6 +5,7 @@ import {AuthRedActionType, authReducer} from './reducers/authReducer';
 import {ProfileActionType, profileReducer} from './reducers/profileReducer';
 import {appReducer, LoadingActionType} from './reducers/appReducer';
 import {packsReducer, PacksReducerActionType} from './reducers/packsReducer';
+import {cardsReducer, CardsReducerActionType} from "./reducers/cardsReducer";
 
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     profile: profileReducer,
     app: appReducer,
     packs: packsReducer,
+    cards: cardsReducer,
 })
 export const store = createStore(rootReducer, applyMiddleware(thunk))
 
@@ -19,7 +21,7 @@ export const store = createStore(rootReducer, applyMiddleware(thunk))
 //type
 
 //Типизация санок
-export type AppActionType = AuthRedActionType | ProfileActionType | LoadingActionType | PacksReducerActionType
+export type AppActionType = AuthRedActionType | ProfileActionType | LoadingActionType | PacksReducerActionType | CardsReducerActionType
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, AppActionType>
 export const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
 

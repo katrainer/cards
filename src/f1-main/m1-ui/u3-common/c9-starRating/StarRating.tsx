@@ -3,11 +3,11 @@ import s from './StarRating.module.css'
 import {FaStar} from 'react-icons/fa'
 
 type PropsType = {
-    value: number
+    rating: number
+    callback?: (rating: number)=> void
 }
 
-export const StarRating: FC<PropsType> = ({value}) => {
-    const [rating, setRating] = useState<number>(value)
+export const StarRating: FC<PropsType> = ({rating, callback}) => {
     const [hover, setHover] = useState<number>(0)
     return (
         <div>
@@ -20,7 +20,7 @@ export const StarRating: FC<PropsType> = ({value}) => {
                             name={'rating'}
                             value={ratingValue}
                             onClick={() => {
-                                setRating(ratingValue)
+                                callback && callback(ratingValue)
                             }}
 
                         />

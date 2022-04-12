@@ -15,7 +15,7 @@ import {isMeTC} from './m2-store/reducers/authReducer';
 import {useAppSelector} from './m2-store/store';
 import Preloader from "./m1-ui/u3-common/c5-Preloader/Preloader";
 import {AllPacks} from "../f2-features/fe5-allPacks/AllPacks";
-import {Cards} from "../f2-features/card/Сards";
+import {Cards} from "../f2-features/fe6-cards/Сards";
 
 function App() {
 

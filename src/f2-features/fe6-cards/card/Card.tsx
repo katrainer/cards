@@ -10,7 +10,6 @@ type PropsType = {
     answer: string
     lastUpdated: string
     grade: number
-    action: string
     updateRating: (rating: number) => void
     removeCard: () => void
     _id: string
@@ -19,7 +18,7 @@ type PropsType = {
 
 export const Card: FC<PropsType> = ({
                                         lastUpdated, question, answer,
-                                        grade, action, updateRating, _id, removeCard
+                                        grade, updateRating, _id, removeCard
                                     }) => {
     const [editMode, setEditMode] = useState(false)
 

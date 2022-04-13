@@ -6,14 +6,14 @@ import {Modal} from "f1-main/m1-ui/u3-common/c4-modal/Modal";
 import {CardUpdateForm} from "./CardUpdateForm/CardUpdateForm";
 
 type PropsType = {
-    question?: string
-    answer?: string
-    lastUpdated?: string
-    grade?: number
-    action?: string
-    updateRating?: (rating: number) => void
-    removeCard?: () => void
-    _id?: string
+    question: string
+    answer: string
+    lastUpdated: string
+    grade: number
+    action: string
+    updateRating: (rating: number) => void
+    removeCard: () => void
+    _id: string
 }
 
 
@@ -26,19 +26,19 @@ export const Card: FC<PropsType> = ({
     return (
         <div className={s.block}>
             <span className={s.question}>
-                        {question ? question : 'Question'}
+                        {question}
             </span>
             <span className={s.answer}>
-                {answer ? answer : 'Answer'}
+                {answer}
                     </span>
             <span className={s.lastUpdated}>
-                {lastUpdated ? lastUpdated : 'Last Updated'}
+                {lastUpdated}
                     </span>
             <span className={s.grade}>
-                {grade !== undefined ? <StarRating rating={grade} callback={updateRating}/> : 'Grade'}
+                <StarRating rating={grade} callback={updateRating}/>
                     </span>
             <span className={s.action}>
-                        {_id ? <div>
+                        <div>
                             <SuperButton onClick={() => {
                                 setEditMode(!editMode)
                             }}>Edit</SuperButton>
@@ -46,8 +46,7 @@ export const Card: FC<PropsType> = ({
                             <Modal editMode={editMode} setEditMode={setEditMode}>
                                 <CardUpdateForm setEditMode={setEditMode} _id={_id}/>
                             </Modal>
-                        </div> : 'Action'
-                        }
+                        </div>
                     </span>
         </div>
     )

@@ -2,7 +2,6 @@ import SuperInputText from '../c1-SuperInputText/SuperInputText';
 import React from 'react';
 
 type SearchPropsType = {
-    callBack:()=>void
     placeholder?: string
     search: string
     setSearch: (e: string) => void

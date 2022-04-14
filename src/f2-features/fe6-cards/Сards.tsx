@@ -10,6 +10,8 @@ import {Card} from "./card/Card";
 import {CardsUpdateForm} from "./CardsUpdateForm/CardsUpdateForm";
 import {useLocation} from "react-router-dom";
 import {HeaderCard} from "./card/HeaderCards";
+import {useDebounce} from "../../f1-main/m1-ui/u3-common/c10-UseDebounce/useDebounce";
+import {updateRequestPacksDataTC} from "../../f1-main/m2-store/reducers/packsReducer";
 
 export const Cards: FC = () => {
     const [editMode, setEditMode] = useState(false)
@@ -37,6 +39,21 @@ export const Cards: FC = () => {
         )
     }, [cards])
 
+
+
+    const [test, setTest] = useState<null | number>(null)
+    const [value, setValue] = useState('')
+    const packName = useDebounce(value, 1500) as string
+
+    useEffect(() => {
+        if (test) {
+            dispatch(updateRequestPacksDataTC({packName}))
+        }
+        setTest(1)
+    }, [packName])
+
+
+
     useEffect(() => {
         dispatch(setCardsTC())
     }, [sortCards])
@@ -45,8 +62,7 @@ export const Cards: FC = () => {
         <div>
             <h1>Pack Name</h1>
             <div>
-                <Search placeholder={'Question'} callBack={() => {
-                }}/>
+                <Search placeholder={'Question'} setSearch={setValue} search={value} />
                 <SuperButton onClick={()=>{setEditMode(!editMode)}}>Add card</SuperButton>
                 <Modal editMode={editMode} setEditMode={setEditMode}>
                     <CardsUpdateForm setEditMode={setEditMode} cardsPack_id={cardsPack_id}/>

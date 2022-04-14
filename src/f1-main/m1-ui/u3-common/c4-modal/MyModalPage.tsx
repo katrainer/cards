@@ -10,7 +10,7 @@ import UpdatePack from "./ModalPages/UpdatePack/UpdatePack"
 
 type MyModalPagePropsType = {
     addNewPack: (name: string, privateBoolean: boolean) => void
-    deletePack: (id: string) => void
+    deletePack?: (id: string) => void
     updatePack: (id: string, newName: string) => void
 }
 
@@ -20,7 +20,7 @@ const MyModalPage = ({addNewPack, deletePack, updatePack}: MyModalPagePropsType)
     return (
         <MyModal activeModal={activeModal} title={title}>
             {activeModal === 'addPack' && <AddPacks addNewPack={addNewPack}/>}
-            {activeModal === 'deletePack' && <DeletePack deletePack={deletePack}/>}
+            {/*{activeModal === 'deletePack' && <DeletePack deletePack={deletePack}/>}*/}
             {activeModal === 'updatePack' && <UpdatePack updatePack={updatePack}/>}
         </MyModal>
     )

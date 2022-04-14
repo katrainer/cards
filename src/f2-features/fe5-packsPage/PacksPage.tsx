@@ -1,8 +1,13 @@
 import {useAppSelector} from '../../f1-main/m2-store/store';
 import {getPacksDataType} from '../../f1-main/m3-API/apiPacks';
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {addPackTC, changeNumberPageCardsAC, deletePackTC, getAllPacks, setPacksCountAC, updatePackTC} from '../../f1-main/m2-store/reducers/packsReducer';
+import {
+    addPackTC,
+    getAllPacks,
+    updatePackTC,
+    updateRequestPacksDataTC,
+} from '../../f1-main/m2-store/reducers/packsReducer';
 import {Paginator} from '../../f1-main/m1-ui/u3-common/c7-Paginator/Paginator';
 import SuperSelect from '../../f1-main/m1-ui/u3-common/c8-SuperSelect/SuperSelect';
 import s from './AllPacks.module.css'
@@ -10,7 +15,6 @@ import {PacksHeader} from './p1-PacksHeader/PacksHeader';
 import {Packs} from './p2-Packs/Packs';
 import {RangeCards} from './p3-RangeCards/RangeCards';
 import MyModalPage from '../../f1-main/m1-ui/u3-common/c4-modal/MyModalPage';
-import { useDebounce } from 'f1-main/m1-ui/u3-common/c10-UseDebounce/useDebounce';
 
 const arr = ['16', '12', '8', '4']
 export const PacksPage = () => {
@@ -18,45 +22,30 @@ export const PacksPage = () => {
     const totalCount = useAppSelector<number>(state => state.packs.cardPacksTotalCount)
     const pageCount = useAppSelector<number>(state => state.packs.requestPacksData.pageCount)
     const requestPacksData = useAppSelector<getPacksDataType>(state => state.packs.requestPacksData)
-    const packs = useAppSelector(state=> state.packs.packs)
-    
 
-    const [search, setSearch]= useState('')
-    const searchDebounce = useDebounce(search, 1500)
-
-
-    const [valueSelect, setValueSelect] = useState(arr[3])
-
-
-    const currentPageHelper = useCallback(() => {
-
+    const currentPageHelper = useCallback((page: number) => {
+        dispatch(updateRequestPacksDataTC({page}))
     }, [])
 
     useEffect(() => {
-        dispatch(getAllPacks(String(searchDebounce)))
-    }, [requestPacksData,searchDebounce])
+        dispatch(getAllPacks())
+    }, [requestPacksData])
 
     const addNewPack = (name: string, privateBoolean: boolean) => {
         dispatch(addPackTC(name, privateBoolean))
     }
 
-    const deletePack = (id: string) => {
-        dispatch(deletePackTC(id))
+    const updatePackHandler = (_id: string, name: string) => {
+        dispatch(updatePackTC(_id, name))
     }
-
-    const updatePack = (_id: string, name: string) => {
-       dispatch(updatePackTC(_id,name))
-    }
-
-    const setCardCount = (cardsCount: number) => {
-        dispatch(setPacksCountAC(cardsCount))
-        dispatch(changeNumberPageCardsAC(1))
+    const setCardCount = (pageCount: number) => {
+        dispatch(updateRequestPacksDataTC({pageCount}))
     };
 
     return (
         <div>
             <h2>All Packs</h2>
-            <PacksHeader search={search} setSearch={setSearch}/>
+            <PacksHeader/>
             <Packs/>
             <div>
                 <Paginator totalCount={totalCount} pageCount={pageCount} callback={currentPageHelper}/>
@@ -64,12 +53,12 @@ export const PacksPage = () => {
                     <SuperSelect
                         options={arr}
                         value={pageCount}
-                        onChangeOption={(pageCount)=>setCardCount(Number(pageCount))}/>
+                        onChangeOption={(pageCount) => setCardCount(Number(pageCount))}/>
                     <p>Цифры в селекте - это сколько колод минимально отображаются</p>
                 </div>
             </div>
             <RangeCards/>
-            <MyModalPage addNewPack={addNewPack} deletePack={deletePack} updatePack={updatePack}/>
+            <MyModalPage addNewPack={addNewPack} updatePack={updatePackHandler}/>
         </div>
     )
 }

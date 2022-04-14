@@ -1,4 +1,3 @@
-import s from "./AddPacks.module.scss";
 import { useState } from "react";
 import SuperCheckbox from "f1-main/m1-ui/u3-common/c3-SuperCheckbox/SuperCheckbox";
 import SuperButton from "f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton";

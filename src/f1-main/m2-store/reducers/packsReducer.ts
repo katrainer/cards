@@ -9,13 +9,15 @@ enum EnumPacksReducerActionType {
     changeRequestStatusType = 'PACKS/CHANGE-REQUEST-STATUS-TYPE',
     setTotalPacks = 'PACKS/SET-TOTAL-PACKS',
     addPack = 'PACKS/ADD-PACK',
+    setPacksCount = 'PACK-ITEM/SET-PACKS-COUNT',
+    changeNamberPack = 'PACK-ITEM/CHANGE-NUMBER-CARDS'
     // deletePack = 'PACKS/DELETE-PACK',
 }
 
 const initialState = {
     packs: [] as PackType[],
     requestStatus: 'idle' as RequestStatusType,
-    requestPacksData: {
+    requestPacksData:  {
         packName: '',
         min: 0,
         max: 9,
@@ -26,11 +28,15 @@ const initialState = {
     cardPacksTotalCount: 0
 }
 
+
+
 export const packsReducer = (state: initialStateType = initialState, action: PacksReducerActionType): initialStateType => {
     switch (action.type) {
         case EnumPacksReducerActionType.setPacks:
         case EnumPacksReducerActionType.changeRequestStatusType:
         case EnumPacksReducerActionType.setTotalPacks:
+            case EnumPacksReducerActionType.setPacksCount:
+                case EnumPacksReducerActionType.changeNamberPack:
             return {...state, ...action.payload}
         // !!! НЕ ИЗМЕНЯТЬ, ВСЕ СЛОМАЕТСЯ, ИГНАТ ПОМОГИ!!!
         case 'PACKS/DELETE-PACK':
@@ -63,6 +69,18 @@ const deletePackAC = (id: string) => {
     return {
         type: 'PACKS/DELETE-PACK',
         id,
+    } as const
+}
+export const setPacksCountAC = (cardsCount: number) => {
+    return {
+        type: EnumPacksReducerActionType.setPacksCount,
+        payload: {cardsCount}
+    } as const
+}
+export const changeNumberPageCardsAC = (numberPage: number) => {
+    return {
+        type: EnumPacksReducerActionType.changeNamberPack,
+        payload: {numberPage}
     } as const
 }
 
@@ -129,4 +147,6 @@ export type PacksReducerActionType =
     | ReturnType<typeof changeRequestStatusAC>
     | ReturnType<typeof setTotalPacks>
     | ReturnType<typeof deletePackAC>
+    | ReturnType<typeof setPacksCountAC>
+    | ReturnType<typeof changeNumberPageCardsAC>
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'

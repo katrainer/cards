@@ -1,8 +1,9 @@
+
 import {instance} from './apiConfig/apiConfig';
 
 export const packs = {
     //Получаем карты
-    getPacks(data: getPacksDataType, search:string) {
+    getPacks(data: getPacksDataType, search:string,) {
         const { min, max, sortPacks, page, pageCount} = data
         const packName = search
         return instance.get<getPacksResponseType>(`cards/pack?packName=${packName}&min=${min}&max=${max}&sortPacks=${sortPacks}&page=${page}&pageCount=${pageCount}&user_id=${"624f0f316eea350004ade302"}`).then(res => res.data)

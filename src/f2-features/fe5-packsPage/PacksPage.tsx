@@ -2,7 +2,7 @@ import {useAppSelector} from '../../f1-main/m2-store/store';
 import {getPacksDataType} from '../../f1-main/m3-API/apiPacks';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {addPackTC, deletePackTC, getAllPacks, updatePackTC} from '../../f1-main/m2-store/reducers/packsReducer';
+import {addPackTC, changeNumberPageCardsAC, deletePackTC, getAllPacks, setPacksCountAC, updatePackTC} from '../../f1-main/m2-store/reducers/packsReducer';
 import {Paginator} from '../../f1-main/m1-ui/u3-common/c7-Paginator/Paginator';
 import SuperSelect from '../../f1-main/m1-ui/u3-common/c8-SuperSelect/SuperSelect';
 import s from './AllPacks.module.css'
@@ -19,6 +19,7 @@ export const PacksPage = () => {
     const pageCount = useAppSelector<number>(state => state.packs.requestPacksData.pageCount)
     const requestPacksData = useAppSelector<getPacksDataType>(state => state.packs.requestPacksData)
     const packs = useAppSelector(state=> state.packs.packs)
+    
 
     const [search, setSearch]= useState('')
     const searchDebounce = useDebounce(search, 1500)
@@ -47,6 +48,11 @@ export const PacksPage = () => {
        dispatch(updatePackTC(_id,name))
     }
 
+    const setCardCount = (cardsCount: number) => {
+        dispatch(setPacksCountAC(cardsCount))
+        dispatch(changeNumberPageCardsAC(1))
+    };
+
     return (
         <div>
             <h2>All Packs</h2>
@@ -57,8 +63,8 @@ export const PacksPage = () => {
                 <div className={s.goFlex}>
                     <SuperSelect
                         options={arr}
-                        value={valueSelect}
-                        onChangeOption={setValueSelect}/>
+                        value={pageCount}
+                        onChangeOption={(pageCount)=>setCardCount(Number(pageCount))}/>
                     <p>Цифры в селекте - это сколько колод минимально отображаются</p>
                 </div>
             </div>

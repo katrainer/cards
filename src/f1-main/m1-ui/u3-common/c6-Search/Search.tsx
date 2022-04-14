@@ -1,18 +1,16 @@
 import SuperInputText from '../c1-SuperInputText/SuperInputText';
-import React, {useState} from 'react';
-import SuperButton from '../c2-SuperButton/SuperButton';
+import React from 'react';
 
 type SearchPropsType = {
     callBack:()=>void
     placeholder?: string
+    search: string
+    setSearch: (e: string) => void
 }
-export const Search: React.FC<SearchPropsType> = ({callBack, placeholder}) => {
-    const [request, setRequest] = useState('')
-    const onClickHandler = () => {
-        callBack()
-    }
+
+export const Search: React.FC<SearchPropsType> = ({search, setSearch, placeholder}) => {
     return <div>
-        <SuperInputText placeholder={placeholder} value={request} onChangeText={setRequest}/>
-        <SuperButton onClick={onClickHandler}>Search</SuperButton>
+        <SuperInputText value={search} onChangeText={setSearch} placeholder={placeholder}/>
+
     </div>
 }

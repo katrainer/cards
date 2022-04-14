@@ -13,6 +13,8 @@ import {Header} from './m1-ui/u1-header/Header';
 import {useDispatch} from 'react-redux';
 import {isMeTC} from './m2-store/reducers/authReducer';
 import {useAppSelector} from './m2-store/store';
+import Preloader from './m1-ui/u3-common/c5-Preloader/Preloader';
+import {PacksPage} from 'f2-features/fe5-packsPage/PacksPage';
 import Preloader from "./m1-ui/u3-common/c5-Preloader/Preloader";
 import {AllPacks} from "../f2-features/fe5-allPacks/AllPacks";
 import {Cards} from "../f2-features/fe6-cards/Сards";
@@ -39,7 +41,7 @@ function App() {
                 <Route path={routesPath.profile} element={<Profile/>}/>
                 <Route path={routesPath.error} element={<Error/>}/>
                 <Route path={routesPath.test} element={<Test/>}/>
-                <Route path={routesPath.allPacks} element={<AllPacks/>}/>
+                <Route path={routesPath.allPacks} element={<PacksPage/>}/>
                 <Route path={routesPath.card} element={<Cards/>}/>
             </Routes>
         </div>

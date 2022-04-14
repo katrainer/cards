@@ -4,7 +4,7 @@ import s from './Pagination.module.css'
 type PaginatorPropsType = {
     totalCount: number
     pageCount: number
-    callback: () => void
+    callback: (page: number) => void
 }
 
 export const Paginator: React.FC<PaginatorPropsType> =
@@ -13,6 +13,7 @@ export const Paginator: React.FC<PaginatorPropsType> =
                     pageCount,
                     callback,
                 }) => {
+
         const [currentPage, setCurrentPage] = useState(1)
         const totalPages = Math.ceil(totalCount / pageCount)
         const pages = [] as number[]
@@ -42,8 +43,12 @@ export const Paginator: React.FC<PaginatorPropsType> =
         const toFirstPage = () => setCurrentPage(1)
         const toLastPage = () => setCurrentPage(totalPages)
 
+        const [test, setTest] = useState<null | number>(null)
         useEffect(() => {
-            callback()
+            if (test) {
+                callback(currentPage)
+            }
+            setTest(1)
         }, [currentPage])
 
         return (

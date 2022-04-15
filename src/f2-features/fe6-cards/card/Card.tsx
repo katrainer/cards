@@ -12,13 +12,14 @@ type PropsType = {
     grade: number
     updateRating: (rating: number) => void
     removeCard: () => void
-    _id: string
+    cardId: string
+    cardsPack_id: string
 }
 
 
 export const Card: FC<PropsType> = ({
                                         lastUpdated, question, answer,
-                                        grade, updateRating, _id, removeCard
+                                        grade, updateRating, cardId, removeCard,cardsPack_id
                                     }) => {
     const [editMode, setEditMode] = useState(false)
 
@@ -39,11 +40,11 @@ export const Card: FC<PropsType> = ({
             <span className={s.action}>
                         <div>
                             <SuperButton onClick={() => {
-                                setEditMode(!editMode)
+                                setEditMode(true)
                             }}>Edit</SuperButton>
                             <SuperButton onClick={removeCard}>Del</SuperButton>
                             <Modal editMode={editMode} setEditMode={setEditMode}>
-                                <CardUpdateForm setEditMode={setEditMode} _id={_id}/>
+                                <CardUpdateForm setEditMode={setEditMode} cardId={cardId} cardsPack_id={cardsPack_id}/>
                             </Modal>
                         </div>
                     </span>

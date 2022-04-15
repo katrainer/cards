@@ -58,9 +58,9 @@ export const updateGradeAC = (grade: number, id: string) => {
     } as const
 }
 
-export const setCardsTC = (): AppThunk => async (dispatch, getState) => {
+export const setCardsTC = (cardsPack_id: string): AppThunk => async (dispatch, getState) => {
 
-    const {cardsPack_id, sortCards, page, pageCount } = getState().cards;
+    const {sortCards, page, pageCount} = getState().cards;
     try {
         const res = await apiCards.getCards({cardsPack_id, sortCards, page, pageCount})
         dispatch(setCardsAC(res.data))
@@ -72,11 +72,11 @@ export const setCardsTC = (): AppThunk => async (dispatch, getState) => {
     }
 }
 
-export const updateCardTC = (_id: string, question?: string, answer?:string):AppThunk=> async (dispatch,getState)=>{
+export const updateCardTC = (cardsPack_id: string, _id: string, question?: string, answer?: string): AppThunk => async (dispatch, getState) => {
 
-    try{
+    try {
         await apiCards.updateCards({_id, question, answer})
-        dispatch(setCardsTC())
+        dispatch(setCardsTC(cardsPack_id))
     } catch (e) {
         if (axios.isAxiosError(e) && e.response) {
             const errorMessage = e.response.data.error;
@@ -85,11 +85,11 @@ export const updateCardTC = (_id: string, question?: string, answer?:string):App
     }
 }
 
-export const createCardTC = (data: CreateCardsType):AppThunk=> async (dispatch,getState)=>{
+export const createCardTC = (data: CreateCardsType): AppThunk => async (dispatch, getState) => {
 
-    try{
+    try {
         await apiCards.createCard(data)
-        dispatch(setCardsTC())
+        dispatch(setCardsTC(data.cardsPack_id))
     } catch (e) {
         if (axios.isAxiosError(e) && e.response) {
             const errorMessage = e.response.data.error;
@@ -98,10 +98,10 @@ export const createCardTC = (data: CreateCardsType):AppThunk=> async (dispatch,g
     }
 }
 
-export const removeCardTC = (id: string):AppThunk=> async (dispatch)=>{
-    try{
+export const removeCardTC = (cardsPack_id: string, id: string): AppThunk => async (dispatch) => {
+    try {
         await apiCards.removeCard(id)
-        dispatch(setCardsTC())
+        dispatch(setCardsTC(cardsPack_id))
     } catch (e) {
         if (axios.isAxiosError(e) && e.response) {
             const errorMessage = e.response.data.error;

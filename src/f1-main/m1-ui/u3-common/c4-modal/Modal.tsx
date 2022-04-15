@@ -1,4 +1,4 @@
-import s from './MyModal.module.css'
+import s from './Modal.module.css'
 import {FC} from "react";
 
 

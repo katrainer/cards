@@ -8,10 +8,11 @@ import {updateCardTC} from "../../../../f1-main/m2-store/reducers/cardsReducer";
 
 type PropsType = {
     setEditMode: (editMode: boolean) => void
-    _id: string
+    cardId: string
+    cardsPack_id: string
 }
 
-export const CardUpdateForm = ({setEditMode, _id}: PropsType) => {
+export const CardUpdateForm = ({setEditMode, cardId, cardsPack_id}: PropsType) => {
     const dispatch = useDispatch();
     const formik = useFormik({
         initialValues: {
@@ -21,7 +22,7 @@ export const CardUpdateForm = ({setEditMode, _id}: PropsType) => {
         onSubmit: (values, {resetForm}) => {
           // alert(JSON.stringify(values))
             setEditMode(false)
-            dispatch(updateCardTC(_id, values.question, values.answer))
+            dispatch(updateCardTC(cardsPack_id, cardId, values.question, values.answer))
             resetForm();
         }
     })

@@ -4,5 +4,9 @@
 
 .container span {
     border: solid 1px;
-    width: 200px;
+    width: 350px;
+}
+
+.navLinkItem {
+    text-decoration: none;
 }

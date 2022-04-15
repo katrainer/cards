@@ -1,7 +1,7 @@
-import {useAppSelector} from '../../f1-main/m2-store/store';
+import {AppRootStateType, useAppSelector} from '../../f1-main/m2-store/store';
 import {getPacksDataType} from '../../f1-main/m3-API/apiPacks';
 import React, {useCallback, useEffect} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {
     addPackTC,
     getAllPacks,
@@ -15,10 +15,13 @@ import {PacksHeader} from './p1-PacksHeader/PacksHeader';
 import {Packs} from './p2-Packs/Packs';
 import {RangeCards} from './p3-RangeCards/RangeCards';
 import MyModalPage from '../../f1-main/m1-ui/u3-common/c4-modal/MyModalPage';
+import {Navigate} from "react-router-dom";
+import {routesPath} from "../../f1-main/m1-ui/u2-routes/routesPath";
 
 const arr = ['16', '12', '8', '4']
 export const PacksPage = () => {
     const dispatch = useDispatch()
+    const isAuth = useSelector<AppRootStateType, boolean>((state) => state.auth.isMe)
     const totalCount = useAppSelector<number>(state => state.packs.cardPacksTotalCount)
     const pageCount = useAppSelector<number>(state => state.packs.requestPacksData.pageCount)
     const requestPacksData = useAppSelector<getPacksDataType>(state => state.packs.requestPacksData)
@@ -41,7 +44,7 @@ export const PacksPage = () => {
     const setCardCount = (pageCount: number) => {
         dispatch(updateRequestPacksDataTC({pageCount}))
     };
-
+    if (!isAuth) return <Navigate to={routesPath.login}/>;
     return (
         <div>
             <h2>All Packs</h2>

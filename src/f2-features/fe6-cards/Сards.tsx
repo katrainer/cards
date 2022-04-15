@@ -22,7 +22,6 @@ export const Cards: FC = () => {
     // @ts-ignore
     const { packId, packName } = location.state;
 
-    console.log(location.state)
     const updateRating = useCallback((rating: number, id: string) => {
         dispatch(updateGradeAC(rating, id))
     }, [])

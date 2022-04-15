@@ -28,6 +28,7 @@ export type GetCardsDataType = {
     pageCount?: number
 }
 
+
 export type CardsType = {
     answer: string
     question: string

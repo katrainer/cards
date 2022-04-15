@@ -2,7 +2,7 @@ import React, {FC} from "react";
 import s from './Card.module.css'
 
 
-export const HeaderCard: FC = () => {
+export const TableHeaders: FC = () => {
 
 
     return (

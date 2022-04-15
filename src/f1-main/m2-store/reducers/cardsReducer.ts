@@ -19,7 +19,6 @@ const initialState = {
     pageCount: 50,
     packUserId: '',
     sortCards: '0updated',
-    cardsPack_id: '6255617c2a4150000412ed70'
 }
 
 export const cardsReducer = (state: initialStateType = initialState, action: CardsReducerActionType): initialStateType => {
@@ -64,6 +63,7 @@ export const setCardsTC = (cardsPack_id: string): AppThunk => async (dispatch, g
     try {
         const res = await apiCards.getCards({cardsPack_id, sortCards, page, pageCount})
         dispatch(setCardsAC(res.data))
+        console.log(res.data)
     } catch (e) {
         if (axios.isAxiosError(e) && e.response) {
             const errorMessage = e.response.data.error;

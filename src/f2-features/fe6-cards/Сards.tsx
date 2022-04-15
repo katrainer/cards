@@ -1,30 +1,28 @@
-import React, {FC, useCallback, useEffect, useMemo, useState} from 'react';
+import React, {FC, useEffect, useMemo} from 'react';
 import {formatDate} from "f1-main/m4-utils/formatDate";
 import {useDispatch} from "react-redux";
 import {removeCardTC, setCardsTC, updateGradeAC} from "../../f1-main/m2-store/reducers/cardsReducer";
 import {useAppSelector} from "../../f1-main/m2-store/store";
-import SuperButton from "../../f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton";
-import {Modal} from "../../f1-main/m1-ui/u3-common/c4-modal/Modal";
 import {Card} from "./card/Card";
-import {CardsUpdateForm} from "./CardsUpdateForm/CardsUpdateForm";
 import {useLocation} from "react-router-dom";
-import {HeaderCard} from "./card/HeaderCards";
+import {AddCard} from "./card/AddCard";
+import {TableHeaders} from "./card/TableHeaders";
 
 
 export const Cards: FC = () => {
-    const [editMode, setEditMode] = useState(false)
+
     const dispatch = useDispatch();
     const cards = useAppSelector(state => state.cards.cards)
-    // const cardsPack_id = useAppSelector(state => state.cards.cardsPack_id)
     const sortCards = useAppSelector(state => state.cards.sortCards)
+    const myId = useAppSelector(state => state.profile.profile._id)
+    const packUserId = useAppSelector(state => state.cards.packUserId)
     const location = useLocation()
-
     // @ts-ignore
-    const { packId, packName } = location.state;
+    const {packId, packName} = location.state;
 
-    const updateRating = useCallback((rating: number, id: string) => {
-        dispatch(updateGradeAC(rating, id))
-    }, [])
+    const updateRating = (rating: number, cardId: string) => {
+        dispatch(updateGradeAC(rating, cardId))
+    }
 
     const removeCard = (packId: string, cardId: string) => {
         dispatch(removeCardTC(packId, cardId))
@@ -35,14 +33,11 @@ export const Cards: FC = () => {
                                     question={t.question} answer={t.answer}
                                     lastUpdated={formatDate(t.updated)} grade={t.grade}
                                     updateRating={(rating) => updateRating(rating, t._id)}
-                                    removeCard={() => removeCard(packId, t._id)} cardId={t._id}
-                                    cardsPack_id={packId}
+                                    removeCard={() => removeCard(t.cardsPack_id, t._id)} cardId={t._id}
+                                    cardsPack_id={t.cardsPack_id} myId={myId} userId={t.user_id}
             />
         )
     }, [cards])
-
-
-
 
     useEffect(() => {
         dispatch(setCardsTC(packId))
@@ -51,16 +46,12 @@ export const Cards: FC = () => {
     return (
         <div>
             <h1>{packName}</h1>
+            {
+                packUserId === myId
+                && <AddCard cardsPack_id={packId} userId={myId}/>
+            }
             <div>
-                <SuperButton onClick={() => {
-                    setEditMode(true)
-                }}>Add card</SuperButton>
-                <Modal editMode={editMode} setEditMode={setEditMode}>
-                    <CardsUpdateForm setEditMode={setEditMode} cardsPack_id={packId}/>
-                </Modal>
-            </div>
-            <div>
-                <HeaderCard/>
+                <TableHeaders/>
                 {newCards}
             </div>
         </div>

@@ -8,7 +8,7 @@ import {createCardTC} from "../../../f1-main/m2-store/reducers/cardsReducer";
 
 type PropsType = {
     setEditMode: (editMode: boolean) => void
-    cardsPack_id:string
+    cardsPack_id: string
 }
 
 export const CardsUpdateForm = ({setEditMode, cardsPack_id}: PropsType) => {
@@ -19,7 +19,7 @@ export const CardsUpdateForm = ({setEditMode, cardsPack_id}: PropsType) => {
             answer: '',
         },
         onSubmit: (values, {resetForm}) => {
-          // alert(JSON.stringify(values))
+            // alert(JSON.stringify(values))
             setEditMode(false)
             dispatch(createCardTC({cardsPack_id, ...values}))
             resetForm();

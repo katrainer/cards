@@ -145,7 +145,7 @@ export const removeCardTC = (cardsPack_id: string, id: string): AppThunk => asyn
     }
 }
 
-export const updateGradeCard = (grade: GradeType, card_id: string): AppThunk => async dispatch => {
+export const updateGradeCardTC = (grade: GradeType, card_id: string): AppThunk => async dispatch => {
     dispatch(changeRequestStatusAC('loading'))
     try {
         const res = await apiCards.updateGradeCard(grade, card_id)

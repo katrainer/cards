@@ -1,12 +1,12 @@
 import s from './Modal.module.css'
-import {FC} from "react";
+import {FC, memo} from "react";
 
 
 export type PropsType = {
     editMode: boolean
     setEditMode: (editMode: boolean) => void
 }
-export const Modal: FC<PropsType> = ({editMode, setEditMode, children}) => {
+export const Modal: FC<PropsType> = memo(({editMode, setEditMode, children}) => {
     return (
         <div className={editMode ? `${s.modal} ${s.active}` : s.modal}>
             <div className={editMode ? `${s.modal__content} ${s.active}` : s.modal__content}>
@@ -15,6 +15,6 @@ export const Modal: FC<PropsType> = ({editMode, setEditMode, children}) => {
             </div>
         </div>
     )
-}
+})
 
 

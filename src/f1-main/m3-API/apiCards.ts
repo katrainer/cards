@@ -17,19 +17,21 @@ export const apiCards = {
     },
     //отправка оценки карточки
     updateGradeCard(grade: GradeType, card_id: string) {
-        return instance.put<UpdateGradeCardResponse>('cards/grade', {grade, card_id}).then(res => res.data)
+        return instance.put<UpdateGradeCardResponse>('cards/grade', {grade, card_id}).then(res => res.data.updatedGrade)
     },
 }
 
 //type
 export type GradeType = 1 | 2 | 3 | 4 | 5
 export type UpdateGradeCardResponse = {
-    _id: string
-    cardsPack_id: string
-    card_id: string
-    user_id: string
-    grade: GradeType | number //Надо сначала посмотреть, что приходит. Будет ли целое число
-    shots: number
+    updatedGrade:{
+        _id: string
+        cardsPack_id: string
+        card_id: string
+        user_id: string
+        grade: GradeType | number //Надо сначала посмотреть, что приходит. Будет ли целое число
+        shots: number
+    }
 }
 export type GetCardsDataType = {
     cardAnswer?: string

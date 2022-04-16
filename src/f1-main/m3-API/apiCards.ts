@@ -4,7 +4,7 @@ import {AxiosResponse} from "axios";
 
 export const apiCards = {
     getCards(data: GetCardsDataType) {
-        return instance.get<GetCardsDataType, AxiosResponse<GetCardsResponseType>>(`cards/card?card`, {params: data})
+        return instance.get<GetCardsDataType, AxiosResponse<GetCardsResponseType>>(`cards/card`, {params: data})
     },
     createCard(data: CreateCardsType) {
         return instance.post<CreateCardsType>(`cards/card`, {card:data})

@@ -1,13 +1,17 @@
 import React, {FC, useEffect, useMemo} from 'react';
 import {formatDate} from "f1-main/m4-utils/formatDate";
 import {useDispatch} from "react-redux";
-import {removeCardTC, setCardsTC, updateGradeAC} from "../../f1-main/m2-store/reducers/cardsReducer";
+import {removeCardTC, setCardsTC} from "../../f1-main/m2-store/reducers/cardsReducer";
 import {useAppSelector} from "../../f1-main/m2-store/store";
 import {Card} from "./card/Card";
 import {useLocation} from "react-router-dom";
 import {AddCard} from "./card/AddCard";
 import {TableHeaders} from "./card/TableHeaders";
 
+type StateType = {
+    packId: string
+    packName: string
+}
 
 export const Cards: FC = () => {
 
@@ -17,11 +21,11 @@ export const Cards: FC = () => {
     const myId = useAppSelector(state => state.profile.profile._id)
     const packUserId = useAppSelector(state => state.cards.packUserId)
     const location = useLocation()
-    // @ts-ignore
-    const {packId, packName} = location.state;
+
+    const {packId, packName} = location.state as StateType;
 
     const updateRating = (rating: number, cardId: string) => {
-        dispatch(updateGradeAC(rating, cardId))
+        // dispatch(updateGradeAC(rating, cardId))
     }
 
     const removeCard = (packId: string, cardId: string) => {

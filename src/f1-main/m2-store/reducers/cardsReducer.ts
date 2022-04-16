@@ -4,10 +4,7 @@ import axios from "axios";
 
 enum EnumCardsReducerActionType {
     setCards = 'CARDS/SET-CARDS',
-    updateGrade = 'CARDS/UPDATE-GRADE',
-    // removeCard = 'CARDS/REMOVE-CARD',
-    createCards = 'CARDS/CREATE-CARD',
-    updateCard = 'CARDS/UPDATE-CARD',
+    // updateGrade = 'CARDS/UPDATE-GRADE',
 }
 
 const initialState = {
@@ -30,14 +27,14 @@ export const cardsReducer = (state: initialStateType = initialState, action: Car
                 packUserId: action.payload.cardsData.packUserId,
                 cardsTotalCount: action.payload.cardsData.cardsTotalCount,
             }
-        case EnumCardsReducerActionType.updateGrade:
-            return {
-                ...state, cards: [...state.cards, ...state.cards.filter(f => {
-                    if (f._id === action.payload.id) {
-                        f.grade = action.payload.grade
-                    }
-                })]
-            }
+        // case EnumCardsReducerActionType.updateGrade:
+        //     return {
+        //         ...state, cards: [...state.cards, ...state.cards.filter(f => {
+        //             if (f._id === action.payload.id) {
+        //                 f.grade = action.payload.grade
+        //             }
+        //         })]
+        //     }
         default:
             return {...state}
     }
@@ -50,12 +47,12 @@ const setCardsAC = (cardsData: GetCardsResponseType) => {
     } as const
 }
 
-export const updateGradeAC = (grade: number, id: string) => {
-    return {
-        type: EnumCardsReducerActionType.updateGrade,
-        payload: {grade, id},
-    } as const
-}
+// export const updateGradeAC = (grade: number, id: string) => {
+//     return {
+//         type: EnumCardsReducerActionType.updateGrade,
+//         payload: {grade, id},
+//     } as const
+// }
 
 export const setCardsTC = (cardsPack_id: string): AppThunk => async (dispatch, getState) => {
 
@@ -63,7 +60,6 @@ export const setCardsTC = (cardsPack_id: string): AppThunk => async (dispatch, g
     try {
         const res = await apiCards.getCards({cardsPack_id, sortCards, page, pageCount})
         dispatch(setCardsAC(res.data))
-        console.log(res.data)
     } catch (e) {
         if (axios.isAxiosError(e) && e.response) {
             const errorMessage = e.response.data.error;
@@ -113,4 +109,4 @@ export const removeCardTC = (cardsPack_id: string, id: string): AppThunk => asyn
 type initialStateType = typeof initialState
 export type CardsReducerActionType =
     | ReturnType<typeof setCardsAC>
-    | ReturnType<typeof updateGradeAC>
+    // | ReturnType<typeof updateGradeAC>

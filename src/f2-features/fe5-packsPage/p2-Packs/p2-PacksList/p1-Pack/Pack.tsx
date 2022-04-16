@@ -15,7 +15,7 @@ type PackPropsType = {
     id: string
 }
 export const Pack: React.FC<PackPropsType> = ({name, cardsCount, update, id}) => {
-
+// const [searchParams, serSearchParams] = useSearchParams(id)
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const deletePackHandler = () => {
@@ -24,6 +24,7 @@ export const Pack: React.FC<PackPropsType> = ({name, cardsCount, update, id}) =>
     const updatePack = () => {
         dispatch(updatePackModalAC(id, name))
     }
+    console.log(`${routesPath.learn}${id}`)
     return <div className={s.container}>
         <span>{name}</span>
         <span>{cardsCount}</span>
@@ -31,8 +32,11 @@ export const Pack: React.FC<PackPropsType> = ({name, cardsCount, update, id}) =>
         <span>
             <SuperButton onClick={deletePackHandler}>Delete</SuperButton>
             <SuperButton onClick={updatePack}>Edite</SuperButton>
-            <SuperButton>Learn</SuperButton>
-            <SuperButton onClick={() => navigate(routesPath.card, {state: {packId: id, packName: name}})}>
+            <SuperButton  onClick={() => navigate(`${routesPath.learn}/${id}/${name}` )}>
+              Learn
+                {/*<NavLink className={s.navLinkItem} to={`${routesPath.learn}/${searchParams}`}>Learn </NavLink>*/}
+            </SuperButton>
+            <SuperButton onClick={() => navigate(`${routesPath.card}/${id}/${name}`)}>
              Cards
             </SuperButton>
         </span>

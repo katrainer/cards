@@ -16,6 +16,7 @@ import {useAppSelector} from './m2-store/store';
 import Preloader from './m1-ui/u3-common/c5-Preloader/Preloader';
 import {PacksPage} from 'f2-features/fe5-packsPage/PacksPage';
 import {Cards} from "../f2-features/fe6-cards/Сards";
+import {Learn} from "../f2-features/fe6-learn/Learn";
 
 function App() {
 
@@ -40,7 +41,8 @@ function App() {
                 <Route path={routesPath.error} element={<Error/>}/>
                 <Route path={routesPath.test} element={<Test/>}/>
                 <Route path={routesPath.allPacks} element={<PacksPage/>}/>
-                <Route path={routesPath.card} element={<Cards/>}/>
+                <Route path={`${routesPath.card}/:packId/:packName`} element={<Cards/>}/>
+                <Route path={`${routesPath.learn}/:id/:packName`} element={<Learn/>}/>
             </Routes>
         </div>
     )

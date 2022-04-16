@@ -8,8 +8,9 @@ export type PropsType = {
 }
 export const Modal: FC<PropsType> = ({editMode, setEditMode, children}) => {
     return (
-        <div className={editMode ? `${s.modal} ${s.active}` : s.modal} onClick={() => setEditMode(false)}>
+        <div className={editMode ? `${s.modal} ${s.active}` : s.modal}>
             <div className={editMode ? `${s.modal__content} ${s.active}` : s.modal__content}>
+            <span onClick={()=>setEditMode(false)}>x</span>
                 {children}
             </div>
         </div>

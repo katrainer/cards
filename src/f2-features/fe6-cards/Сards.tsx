@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {removeCardTC, setCardsTC} from "../../f1-main/m2-store/reducers/cardsReducer";
 import {useAppSelector} from "../../f1-main/m2-store/store";
 import {Card} from "./card/Card";
-import {useLocation} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {AddCard} from "./card/AddCard";
 import {TableHeaders} from "./card/TableHeaders";
 
@@ -14,15 +14,16 @@ type StateType = {
 }
 
 export const Cards: FC = () => {
-
+    console.log('render')
+const {packId, packName} = useParams() as StateType
     const dispatch = useDispatch();
     const cards = useAppSelector(state => state.cards.cards)
     const sortCards = useAppSelector(state => state.cards.sortCards)
     const myId = useAppSelector(state => state.profile.profile._id)
     const packUserId = useAppSelector(state => state.cards.packUserId)
-    const location = useLocation()
-
-    const {packId, packName} = location.state as StateType;
+    // const location = useLocation()
+    //
+    // const {packId, packName} = location.state as StateType;
 
     const updateRating = (rating: number, cardId: string) => {
         // dispatch(updateGradeAC(rating, cardId))

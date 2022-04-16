@@ -10,6 +10,7 @@ type HeaderCardsPropsType = {
 
 export const AddCard: FC<HeaderCardsPropsType> = ({cardsPack_id,userId}) => {
     const [editMode, setEditMode] = useState(false)
+
     return (
         <div>
                 <SuperButton onClick={() => {

@@ -7,5 +7,6 @@ export const routesPath = {
     error: '/*',
     test: '/test',
     card: '/card',
+    learn: '/learn',
     allPacks: '/allPacks',
 }

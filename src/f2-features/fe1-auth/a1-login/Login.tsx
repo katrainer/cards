@@ -8,6 +8,7 @@ import {logInTC} from 'f1-main/m2-store/reducers/authReducer';
 import SuperInputText from '../../../f1-main/m1-ui/u3-common/c1-SuperInputText/SuperInputText';
 import SuperButton from '../../../f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton';
 import SuperCheckbox from '../../../f1-main/m1-ui/u3-common/c3-SuperCheckbox/SuperCheckbox';
+import s from './Login.module.css'
 
 export const Login = () => {
     const isMe = useAppSelector<boolean>(state => state.auth.isMe)
@@ -38,9 +39,9 @@ export const Login = () => {
             dispatch(logInTC(values))
         },
     })
-    return <div>
-        {isMe && <Navigate to={routesPath.profile}/>}
-        <h2>LOGIN</h2>
+    return <div className={s.mainContainer}>
+        {isMe && <Navigate to={routesPath.allPacks}/>}
+        <div><h2>LOGIN</h2></div>
         <form onSubmit={formik.handleSubmit}>
             <SuperInputText id={'email'}
                    type={'email'}
@@ -58,12 +59,11 @@ export const Login = () => {
                    type={'checkbox'}
                    checked={formik.values.rememberMe}
                    {...formik.getFieldProps('rememberMe')}
-            /> Запомнить<br/>
-            <SuperButton type={'submit'}>Войти</SuperButton>
+            />Remember me?<br/>
+            <SuperButton type={'submit'}>Log In</SuperButton>
         </form>
-        <SuperButton onClick={goToPasswordRecovery}>Forgot your password?</SuperButton>
+        <div><SuperButton onClick={goToPasswordRecovery}>Forgot your password?</SuperButton></div>
         <div>
-            If you don't have a profile, then you need to register
             <SuperButton onClick={goToRegisterHandler}>Register</SuperButton>
         </div>
     </div>

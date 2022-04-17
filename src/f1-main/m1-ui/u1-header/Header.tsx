@@ -1,4 +1,4 @@
-import {NavLink, useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import {routesPath} from '../u2-routes/routesPath';
 import s from './Header.module.css';
 import {useDispatch, useSelector} from 'react-redux';
@@ -16,15 +16,18 @@ export const Header = () => {
         navigate(routesPath.login)
     }
     return <div className={s.containerMain}>
-        <h1>The clever cards</h1>
-        <div className={s.containerNavLink}>
-            <NavLink className={s.navLinkItem} to={routesPath.allPacks}>All Packs</NavLink>
-            <NavLink className={s.navLinkItem} to={routesPath.profile}>Profile </NavLink>
-            <NavLink className={s.navLinkItem} to={routesPath.error}>Error </NavLink>
-            <NavLink className={s.navLinkItem} to={routesPath.test}>Test </NavLink>
-            {/*<NavLink className={s.navLinkItem} to={routesPath.card}>Card </NavLink>*/}
-            {isMe && <SuperButton onClick={logOutHandler}>Log Out</SuperButton>}
+        <div></div>
+        <div>
+            <h1>The clever cards</h1>
         </div>
-        <hr/>
+        {/*<div className={s.containerNavLink}>*/}
+        {/*    <NavLink className={s.navLinkItem} to={routesPath.allPacks}>All Packs</NavLink>*/}
+        {/*    <NavLink className={s.navLinkItem} to={routesPath.profile}>Profile </NavLink>*/}
+        {/*    <NavLink className={s.navLinkItem} to={routesPath.error}>Error </NavLink>*/}
+        {/*    <NavLink className={s.navLinkItem} to={routesPath.test}>Test </NavLink>*/}
+        {/*    /!*<NavLink className={s.navLinkItem} to={routesPath.card}>Card </NavLink>*!/*/}
+        {/*    {isMe && <SuperButton onClick={logOutHandler}>Log Out</SuperButton>}*/}
+        {/*</div>*/}
+        <div>{isMe && <SuperButton onClick={logOutHandler}>Log Out</SuperButton>}</div>
     </div>
 }

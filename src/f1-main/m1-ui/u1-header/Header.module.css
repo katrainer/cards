@@ -1,12 +1,11 @@
 .containerMain {
-    max-width: 100%;
-}
-
-.containerNavLink {
+    width: 100%;
     display: flex;
-    justify-content: space-around;
-}
-
-.navLinkItem {
-    text-decoration: none;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: black 1px solid;
+    z-index: 1000;
+    position: fixed;
+    height: 50px;
+    background: white;
 }

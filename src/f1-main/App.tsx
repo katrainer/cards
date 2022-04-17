@@ -15,8 +15,8 @@ import {isMeTC} from './m2-store/reducers/authReducer';
 import {useAppSelector} from './m2-store/store';
 import Preloader from './m1-ui/u3-common/c5-Preloader/Preloader';
 import {PacksPage} from 'f2-features/fe5-packsPage/PacksPage';
-import {Cards} from "../f2-features/fe6-cards/Сards";
-import {Learn} from "../f2-features/fe6-learn/Learn";
+import {Cards} from '../f2-features/fe6-cards/Сards';
+import {Learn} from '../f2-features/fe6-learn/Learn';
 
 function App() {
 
@@ -31,19 +31,21 @@ function App() {
     return (
         <div className={s.containerMain}>
             <Header/>
-            <Routes>
-                <Route path={'/'} element={<Navigate to={routesPath.login}/>}/>
-                <Route path={routesPath.login} element={<Login/>}/>
-                <Route path={routesPath.signUp} element={<SignUp/>}/>
-                <Route path={routesPath.passwordRecovery} element={<PasswordRecovery/>}/>
-                <Route path={routesPath.passwordChange} element={<PasswordChange/>}/>
-                <Route path={routesPath.profile} element={<Profile/>}/>
-                <Route path={routesPath.error} element={<Error/>}/>
-                <Route path={routesPath.test} element={<Test/>}/>
-                <Route path={routesPath.allPacks} element={<PacksPage/>}/>
-                <Route path={`${routesPath.card}/:packId/:packName`} element={<Cards/>}/>
-                <Route path={`${routesPath.learn}/:id/:packName`} element={<Learn/>}/>
-            </Routes>
+            <div className={s.routes}>
+                <Routes>
+                    <Route path={'/'} element={<Navigate to={routesPath.login}/>}/>
+                    <Route path={routesPath.login} element={<Login/>}/>
+                    <Route path={routesPath.signUp} element={<SignUp/>}/>
+                    <Route path={routesPath.passwordRecovery} element={<PasswordRecovery/>}/>
+                    <Route path={routesPath.passwordChange} element={<PasswordChange/>}/>
+                    <Route path={routesPath.profile} element={<Profile/>}/>
+                    <Route path={routesPath.error} element={<Error/>}/>
+                    <Route path={routesPath.test} element={<Test/>}/>
+                    <Route path={routesPath.allPacks} element={<PacksPage/>}/>
+                    <Route path={`${routesPath.card}/:packId/:packName`} element={<Cards/>}/>
+                    <Route path={`${routesPath.learn}/:id/:packName`} element={<Learn/>}/>
+                </Routes>
+            </div>
         </div>
     )
 }

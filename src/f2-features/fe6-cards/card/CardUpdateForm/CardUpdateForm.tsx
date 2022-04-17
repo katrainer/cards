@@ -1,9 +1,9 @@
-import s from './CardUpdateForm.module.css'
+import s from '../../CardsUpdateForm/CardsUpdateForm.module.css'
 import {useDispatch} from 'react-redux';
 import {useFormik} from 'formik';
 import SuperInputText from 'f1-main/m1-ui/u3-common/c1-SuperInputText/SuperInputText';
 import SuperButton from 'f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton';
-import {updateCardTC} from "../../../../f1-main/m2-store/reducers/cardsReducer";
+import {updateCardTC} from '../../../../f1-main/m2-store/reducers/cardsReducer';
 
 
 type PropsType = {
@@ -20,7 +20,7 @@ export const CardUpdateForm = ({setEditMode, cardId, cardsPack_id}: PropsType) =
             answer: '',
         },
         onSubmit: (values, {resetForm}) => {
-          // alert(JSON.stringify(values))
+            // alert(JSON.stringify(values))
             setEditMode(false)
             dispatch(updateCardTC(cardsPack_id, cardId, values.question, values.answer))
             resetForm();

@@ -9,6 +9,7 @@ import SuperInputText from '../../../f1-main/m1-ui/u3-common/c1-SuperInputText/S
 import SuperButton from '../../../f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton';
 import SuperCheckbox from '../../../f1-main/m1-ui/u3-common/c3-SuperCheckbox/SuperCheckbox';
 import s from './Login.module.css'
+import {useCallback} from 'react';
 
 export const Login = () => {
     const isMe = useAppSelector<boolean>(state => state.auth.isMe)
@@ -16,8 +17,8 @@ export const Login = () => {
     const navigate = useNavigate()
 
     //редирект на регистрацию, если нет профиля
-    const goToRegisterHandler = () => navigate(routesPath.signUp)
-    const goToPasswordRecovery = () => navigate(routesPath.passwordRecovery)
+    const goToRegisterHandler = useCallback(() => navigate(routesPath.signUp), [])
+    const goToPasswordRecovery = useCallback(() => navigate(routesPath.passwordRecovery), [])
 
     const formik = useFormik({
         initialValues: {
@@ -41,24 +42,24 @@ export const Login = () => {
     })
     return <div className={s.mainContainer}>
         {isMe && <Navigate to={routesPath.allPacks}/>}
-        <div><h2>LOGIN</h2></div>
+        <h2>LOGIN</h2>
         <form onSubmit={formik.handleSubmit}>
             <SuperInputText id={'email'}
-                   type={'email'}
-                   placeholder={'email'}
-                   {...formik.getFieldProps('email')}/>
+                            type={'email'}
+                            placeholder={'email'}
+                            {...formik.getFieldProps('email')}/>
             {formik.touched.email && formik.errors.email &&
                 <div style={{color: 'red'}}>{formik.errors.email}</div>}<br/>
             <SuperInputText id={'password'}
-                   type={'password'}
-                   placeholder={'password'}
-                   {...formik.getFieldProps('password')}/>
+                            type={'password'}
+                            placeholder={'password'}
+                            {...formik.getFieldProps('password')}/>
             {formik.touched.password && formik.errors.password &&
                 <div style={{color: 'red'}}>{formik.errors.password}</div>}<br/>
-            <SuperCheckbox id={'check'}
-                   type={'checkbox'}
-                   checked={formik.values.rememberMe}
-                   {...formik.getFieldProps('rememberMe')}
+            <SuperCheckbox id={'rememberMe'}
+                           type={'checkbox'}
+                           checked={formik.values.rememberMe}
+                           {...formik.getFieldProps('rememberMe')}
             />Remember me?<br/>
             <SuperButton type={'submit'}>Log In</SuperButton>
         </form>

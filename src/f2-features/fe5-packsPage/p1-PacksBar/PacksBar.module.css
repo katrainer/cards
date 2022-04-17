@@ -1,0 +1,26 @@
+.titleContainer {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin-top: 22.6px;
+    margin-bottom: 22.6px;
+}
+
+.titleContainer div {
+    border: solid 1px black;
+}
+
+.red {
+    background: red;
+}
+
+.otherContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.otherContainer div{
+    margin-top: 22.6px;
+    margin-bottom: 22.6px;
+}

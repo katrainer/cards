@@ -3,6 +3,7 @@ import {AppThunk} from '../store';
 import axios from 'axios';
 import {deleteProfileAC, setProfileAC} from './profileReducer';
 import {loadingAC} from './appReducer';
+import {setMeIdAC} from './packsReducer';
 
 enum EnumAuthReducerActionType {
     isMe = 'AUTH/IS-ME',
@@ -66,6 +67,7 @@ export const logInTC = (data: LogInArgsType): AppThunk =>
         try {
             const res = await auth.logIn(data);
             dispatch(setProfileAC(res));
+            dispatch(setMeIdAC(res._id))
             dispatch(isMeAC());
         } catch (e: any) {
             if (axios.isAxiosError(e) && e.response) {
@@ -79,6 +81,7 @@ export const isMeTC = (): AppThunk => async dispatch => {
     try {
         const res = await auth.me()
         dispatch(setProfileAC(res))
+        dispatch(setMeIdAC(res._id))
         dispatch(isMeAC())
     } catch (e) {
         if (axios.isAxiosError(e) && e.response) {

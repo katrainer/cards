@@ -1,0 +1,27 @@
+.mainContainer{
+    display: flex;
+    align-items: stretch;
+}
+.mainContainer>div{
+    border: black 1px solid;
+    width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-break: break-word;
+}
+
+.buttonsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.buttonsContainer div{
+margin: 1px;
+}
+.buttonsIcon{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}

@@ -13,21 +13,14 @@ export const Header = () => {
     const navigate = useNavigate()
     const logOutHandler = () => {
         dispatch(logOutTC())
-        navigate(routesPath.login)
+        setTimeout(() => navigate(routesPath.login), 1000)
     }
     return <div className={s.containerMain}>
+        {isMe && <div style={{width: 74}}></div>}
         <div></div>
         <div>
             <h1>The clever cards</h1>
         </div>
-        {/*<div className={s.containerNavLink}>*/}
-        {/*    <NavLink className={s.navLinkItem} to={routesPath.allPacks}>All Packs</NavLink>*/}
-        {/*    <NavLink className={s.navLinkItem} to={routesPath.profile}>Profile </NavLink>*/}
-        {/*    <NavLink className={s.navLinkItem} to={routesPath.error}>Error </NavLink>*/}
-        {/*    <NavLink className={s.navLinkItem} to={routesPath.test}>Test </NavLink>*/}
-        {/*    /!*<NavLink className={s.navLinkItem} to={routesPath.card}>Card </NavLink>*!/*/}
-        {/*    {isMe && <SuperButton onClick={logOutHandler}>Log Out</SuperButton>}*/}
-        {/*</div>*/}
         <div>{isMe && <SuperButton onClick={logOutHandler}>Log Out</SuperButton>}</div>
     </div>
 }

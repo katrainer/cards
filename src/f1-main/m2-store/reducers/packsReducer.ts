@@ -7,7 +7,8 @@ enum EnumPacksReducerActionType {
     setPacks = 'PACKS/SET-PACKS',
     changeRequestStatusType = 'PACKS/CHANGE-REQUEST-STATUS-TYPE',
     setTotalPacks = 'PACKS/SET-TOTAL-PACKS',
-    updateRequestPacksData = 'PACKS/UPDATE-REQUEST-PACKS-DATA'
+    updateRequestPacksData = 'PACKS/UPDATE-REQUEST-PACKS-DATA',
+    setMeId = 'PACKS/SET-ME-ID',
 }
 
 const initialState = {
@@ -20,6 +21,7 @@ const initialState = {
         sortPacks: '0updated',
         page: 1,
         pageCount: 4,
+        user_id: ''
     } as getPacksDataType,
     cardPacksTotalCount: 0
 }
@@ -32,6 +34,8 @@ export const packsReducer = (state: initialStateType = initialState, action: Pac
         case EnumPacksReducerActionType.updateRequestPacksData:
         case EnumPacksReducerActionType.setTotalPacks:
             return {...state, ...action.payload}
+        case EnumPacksReducerActionType.setMeId:
+            return {...state, requestPacksData: {...state.requestPacksData, user_id: action.payload.user_id}}
         default:
             return {...state}
     }
@@ -65,9 +69,16 @@ const updateRequestPacksDataAC =
                 requestPacksData: {
                     ...data
                 }
-            } as const
-        }
+            }
+        } as const
     }
+
+export const setMeIdAC = (user_id: string) => {
+    return {
+        type: EnumPacksReducerActionType.setMeId,
+        payload: {user_id},
+    } as const
+}
 
 //thunk
 
@@ -140,6 +151,7 @@ export const updateRequestPacksDataTC = (param: UpdateRequestPacksDataModel): Ap
         sortPacks: requestPacksData.sortPacks,
         page: requestPacksData.page,
         pageCount: requestPacksData.pageCount,
+        user_id: requestPacksData.user_id,
         ...param
     }
     dispatch(updateRequestPacksDataAC(model))
@@ -153,6 +165,7 @@ type UpdateRequestPacksDataModel = {
     sortPacks?: '1updated' | '0updated'
     page?: number
     pageCount?: number
+    user_id?: string
 }
 type initialStateType = typeof initialState
 export type PacksReducerActionType =
@@ -160,4 +173,5 @@ export type PacksReducerActionType =
     | ReturnType<typeof changeRequestStatusAC>
     | ReturnType<typeof setTotalPacks>
     | ReturnType<typeof updateRequestPacksDataAC>
+    | ReturnType<typeof setMeIdAC>
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'

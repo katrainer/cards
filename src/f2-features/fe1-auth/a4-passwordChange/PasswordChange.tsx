@@ -35,7 +35,7 @@ export const PasswordChange = () => {
         },
     })
     return (
-        <div>
+        <div style={{textAlign: 'center'}}>
             <h2>Password change</h2>
             <form onSubmit={formik.handleSubmit}>
                 <SuperInputText

@@ -29,7 +29,7 @@ const SuperSelect: React.FC<SuperSelectPropsType> = (
         <select className={s.select} onChange={onChangeCallback} {...restProps}>
             {mappedOptions}
         </select>
-    )
+        )
 }
 
 export default SuperSelect

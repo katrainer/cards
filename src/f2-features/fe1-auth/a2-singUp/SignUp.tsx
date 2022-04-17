@@ -43,7 +43,7 @@ export const SignUp = () => {
     });
 
     return (
-        <div>
+        <div style={{textAlign: 'center'}}>
             <h2>Sing Up</h2>
             <form onSubmit={formik.handleSubmit}>
                 <SuperInputText

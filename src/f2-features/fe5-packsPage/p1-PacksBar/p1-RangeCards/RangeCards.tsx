@@ -1,9 +1,10 @@
 import {useEffect, useState} from 'react';
-import {useAppSelector} from '../../../f1-main/m2-store/store';
-import SuperInputText from '../../../f1-main/m1-ui/u3-common/c1-SuperInputText/SuperInputText';
+import {useAppSelector} from '../../../../f1-main/m2-store/store';
+import SuperInputText from '../../../../f1-main/m1-ui/u3-common/c1-SuperInputText/SuperInputText';
 import {useDispatch} from 'react-redux';
-import {updateRequestPacksDataTC} from '../../../f1-main/m2-store/reducers/packsReducer';
-import {useDebounce} from '../../../f1-main/m1-ui/u3-common/c10-UseDebounce/useDebounce';
+import {updateRequestPacksDataTC} from '../../../../f1-main/m2-store/reducers/packsReducer';
+import {useDebounce} from '../../../../f1-main/m1-ui/u3-common/c10-UseDebounce/useDebounce';
+import s from './RangeCards.module.css'
 
 export const RangeCards = () => {
     const dispatch = useDispatch()
@@ -27,14 +28,14 @@ export const RangeCards = () => {
     }, [max])
 
 
-    return <div>
-        <div>
+    return <>
+        <div className={s.range}>
             <span>Min range cards</span>
             <SuperInputText type={'number'} value={valueMin} onChangeText={setValueMin}/>
         </div>
-        <div>
+        <div className={s.range}>
             <span>Max range cards</span>
             <SuperInputText type={'number'} value={valueMax} onChangeText={setValueMax}/>
         </div>
-    </div>
+    </>
 }

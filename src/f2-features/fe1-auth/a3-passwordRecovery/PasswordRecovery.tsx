@@ -32,7 +32,7 @@ export const PasswordRecovery = () => {
     })
     if (isMe) return <Navigate to={routesPath.login}/>
     return (
-        <div>
+        <div style={{textAlign: 'center'}}>
             <h2>Passport restoration</h2>
             <form onSubmit={formik.handleSubmit}>
                 <SuperInputText

@@ -27,7 +27,7 @@ export type getPacksDataType = {
     sortPacks: '1updated' | '0updated'
     page: number
     pageCount: number
-    user_id?: string
+    user_id: string
 }
 
 type getPacksResponseType = {
@@ -37,6 +37,7 @@ type getPacksResponseType = {
     minCardsCount: number
     page: number // выбранная страница
     pageCount: number // количество элементов на странице
+
 }
 type getNewPackResponseType = {
     newCardsPack: PackType[]
@@ -48,4 +49,5 @@ export type PackType = {
     cardsCount: number
     created: string
     updated: string
+    user_name: string
 }

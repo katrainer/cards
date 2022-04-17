@@ -84,13 +84,11 @@ export const Learn = () => {
                 <Modal editMode={editMode} setEditMode={setEditMode}>
                     <>
                         <div>{card.answer}</div>
-
                         {grades.map((g, i) => (
                             <SuperButton key={'grade-' + i} onClick={() => {
                                 onUpdateClick((i + 1) as GradeType, card._id)
                             }}>{g}</SuperButton>
                         ))}
-
                         <div><SuperButton onClick={onNext}>next</SuperButton></div>
                     </>
                 </Modal>

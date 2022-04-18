@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 import SuperButton from "../../../f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton";
-import {Modal} from "../../../f1-main/m1-ui/u3-common/c4-modal/Modal";
+import {Modal} from "../../../f1-main/m1-ui/u3-common/c4-modal/ModalCard";
 import {CardsUpdateForm} from "../CardsUpdateForm/CardsUpdateForm";
 
 type HeaderCardsPropsType = {

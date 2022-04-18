@@ -1,0 +1,10 @@
+@import "../../../../../../../src/f1-main/m1-ui/u4-styles/sass/mixins.scss";
+@import "../../../../../../../src/f1-main/m1-ui/u4-styles/sass/variables";
+
+.delete_packs_container {
+  @include modalBox();
+  .delete_button{
+    background-color: #F1453D;
+
+  }
+}

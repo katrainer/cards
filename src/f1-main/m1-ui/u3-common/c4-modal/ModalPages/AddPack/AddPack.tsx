@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SuperCheckbox from "f1-main/m1-ui/u3-common/c3-SuperCheckbox/SuperCheckbox";
 import SuperButton from "f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton";
+import s from './AddPacks.module.scss'
 
 type AddPacksPropsType = {
     addNewPack: (name: string, privateBoolean: boolean) => void
@@ -15,7 +16,7 @@ const AddPacks = ({ addNewPack }: AddPacksPropsType) => {
   };
   
   return (
-    <div >
+    <div className={s.add_packs_container}>
       <p>New pack:</p>
       <input
         value={name}

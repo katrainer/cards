@@ -117,6 +117,7 @@ export const deletePackTC = (id: string): AppThunk => async dispatch => {
     dispatch(changeRequestStatusAC('loading'))
     try {
         const res = await packs.deletePack(id)
+        dispatch(setActiveModalAC(false))
         dispatch(changeRequestStatusAC('succeeded'))
         dispatch(getAllPacks())
     } catch (e) {

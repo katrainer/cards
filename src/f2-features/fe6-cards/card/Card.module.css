@@ -1,18 +1,20 @@
 .block {
     display: flex;
+    flex-wrap: wrap;
     text-align: left;
     align-items: center;
     border: 1px solid black;
+    
 }
 .block span {
     margin: 5px;
 }
 
 .question {
-    width: 500px;
+    width: 200px;
 }
 .answer {
-    width: 500px;
+    width: 200px;
 }
 .lastUpdated {
     text-align: center;

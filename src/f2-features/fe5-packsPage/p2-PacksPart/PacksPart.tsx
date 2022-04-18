@@ -3,7 +3,7 @@ import {Paginator} from '../../../f1-main/m1-ui/u3-common/c7-Paginator/Paginator
 import SuperSelect from '../../../f1-main/m1-ui/u3-common/c8-SuperSelect/SuperSelect';
 import MyModalPage from '../../../f1-main/m1-ui/u3-common/c4-modal/MyModalPage';
 import React, {useCallback} from 'react';
-import {addPackTC, updatePackTC, updateRequestPacksDataTC} from '../../../f1-main/m2-store/reducers/packsReducer';
+import {addPackTC, deletePackTC, updatePackTC, updateRequestPacksDataTC} from '../../../f1-main/m2-store/reducers/packsReducer';
 import {useAppSelector} from '../../../f1-main/m2-store/store';
 import {useDispatch} from 'react-redux';
 import SuperButton from '../../../f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton';
@@ -19,6 +19,8 @@ export const PacksPart = () => {
     const currentPageHelper = useCallback((page: number) => {
         dispatch(updateRequestPacksDataTC({page}))
     }, [])
+
+
     const addNewPack = (name: string, privateBoolean: boolean) => {
         dispatch(addPackTC(name, privateBoolean))
     }
@@ -26,6 +28,11 @@ export const PacksPart = () => {
     const updatePackHandler = (_id: string, name: string) => {
         dispatch(updatePackTC(_id, name))
     }
+    const deletePackHandler = (_id: string) => {
+        dispatch(deletePackTC(_id))
+    }
+
+
     const setCardCount = (pageCount: number) => {
         dispatch(updateRequestPacksDataTC({pageCount}))
     }
@@ -49,6 +56,6 @@ export const PacksPart = () => {
                 />
             </div>
         </div>
-        <MyModalPage addNewPack={addNewPack} updatePack={updatePackHandler}/>
+        <MyModalPage addNewPack={addNewPack} updatePack={updatePackHandler} deletePack={deletePackHandler}/>
     </>
 }

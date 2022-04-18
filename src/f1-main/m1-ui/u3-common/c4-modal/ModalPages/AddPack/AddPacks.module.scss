@@ -1,0 +1,6 @@
+@import "../../../../u4-styles/sass/mixins.scss";
+@import "../../../../u4-styles/sass/variables";
+
+.add_packs_container {
+  @include modalBox()
+}

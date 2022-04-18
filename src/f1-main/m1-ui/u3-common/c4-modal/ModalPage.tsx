@@ -1,4 +1,4 @@
-import s from './MyModal.module.css'
+import s from './ModalPage.module.scss'
 import {useDispatch} from "react-redux";
 import { ModalType, setActiveModalAC } from 'f1-main/m2-store/reducers/modal-reducer';
 

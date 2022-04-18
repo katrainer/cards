@@ -1,5 +1,5 @@
 import SuperButton from 'f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton';
-import {updatePackModalAC} from 'f1-main/m2-store/reducers/modal-reducer';
+import {deletePackModalAC, updatePackModalAC} from 'f1-main/m2-store/reducers/modal-reducer';
 import React from 'react';
 import {useDispatch} from 'react-redux';
 import s from './Pack.module.css'
@@ -20,11 +20,12 @@ type PackPropsType = {
 export const Pack: React.FC<PackPropsType> = ({name, cardsCount, update, id, owner}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
-    const deletePackHandler = () => {
-        dispatch(deletePackTC(id))
-    }
+    
     const updatePack = () => {
         dispatch(updatePackModalAC(id, name))
+    }
+    const deletePackHandler = () => {
+        dispatch(deletePackModalAC(id, name))
     }
     console.log(`${routesPath.learn}${id}`)
     return <div className={s.mainContainer}>

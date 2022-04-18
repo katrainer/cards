@@ -1,6 +1,7 @@
 import SuperButton from "f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton"
 import { useAppSelector } from "f1-main/m2-store/store"
 import { useState } from "react"
+import s from './EditPack.module.scss';
 
 
 type updateNamePacksPropsType = {
@@ -19,7 +20,7 @@ const UpdatePack = ({updatePack}: updateNamePacksPropsType) => {
     }
 
     return (
-        <div >
+        <div className={s.add_packs_container}>
             <p>New name:</p>
             <input value={value} onChange={(e) => setValue(e.currentTarget.value)} placeholder={'Name'}/>
 

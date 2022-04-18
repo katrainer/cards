@@ -6,6 +6,7 @@ import {useDispatch} from "react-redux";
 import {useAppSelector} from "../../f1-main/m2-store/store";
 import {useParams} from "react-router-dom";
 import {setCardsTC, updateGradeCardTC} from "../../f1-main/m2-store/reducers/cardsReducer";
+import s from './Learn.module.css'
 
 const grades = ['совсем не знаю', 'не знаю', 'почти вспомнил', 'неуверенно знаю', 'знаю'];
 
@@ -46,7 +47,7 @@ export const Learn = () => {
             _id: '',
         }
     );
-    console.log(id)
+    console.log(card.answer)
 
     useEffect(() => {
 
@@ -54,45 +55,54 @@ export const Learn = () => {
             dispatch(setCardsTC(id));
             setFirst(false);
         }
-    }, [id, cards, first]);
+        if (cards.length > 0) {
+            // dispatch
+            setCard(getCard(cards));
+        }
+    }, [dispatch, id, cards, first]);
 
     const onUpdateClick = (grade: GradeType, cardId: string) => {
+        setEditMode(false);
         dispatch(updateGradeCardTC(grade, cardId))
     }
 
-    const onNext = () => {
-        setEditMode(false);
-
-        if (cards.length > 0) {
-            // dispatch
-            setTimeout(() => setCard(getCard(cards)), 500);
-        } else {
-
-        }
-    }
+    // const onNext = () => {
+    //     setEditMode(false);
+    //
+    //     if (cards.length > 0) {
+    //         // dispatch
+    //         setTimeout(() => setCard(getCard(cards)), 500);
+    //     } else {
+    //
+    //     }
+    // }
     return (
-        <div>
+        <div className={s.learnWrapper}>
             {/*<SuperButton onClick={()=> {setEditMode(true)}}>start</SuperButton>*/}
-            <div>
+            <h2>
                 {packName}
-
-                <div>{card.question}</div>
+            </h2>
+                <h3 className={s.question}>{card.question}</h3>
                 <div>
-                    <SuperButton onClick={() => setEditMode(!isChecked)}>check</SuperButton>
+                    <SuperButton className={s.button} onClick={() => setEditMode(!isChecked)}>check</SuperButton>
                 </div>
 
                 <Modal editMode={editMode} setEditMode={setEditMode}>
-                    <>
-                        <div>{card.answer}</div>
+                    <div className={s.answer}>
+                        <p>{card.answer}</p>
+                        <div className={s.gradeAnswer} >
                         {grades.map((g, i) => (
                             <SuperButton key={'grade-' + i} onClick={() => {
                                 onUpdateClick((i + 1) as GradeType, card._id)
                             }}>{g}</SuperButton>
                         ))}
-                        <div><SuperButton onClick={onNext}>next</SuperButton></div>
-                    </>
+                        </div>
+                        {/*<div>*/}
+                        {/*    <SuperButton onClick={onNext}>next</SuperButton>*/}
+                        {/*</div>*/}
+                    </div>
                 </Modal>
-            </div>
+
         </div>
     );
 };

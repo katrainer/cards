@@ -1,7 +1,7 @@
 .modal {
     height: 100vh;
     width: 100vw;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
     position: fixed;
     top: 0;
     left: 0;
@@ -19,13 +19,29 @@
 }
 
 .modal__content {
+    max-width: 50%;
     padding: 20px;
     border-radius: 12px;
     background-color: white;
     transform: scale(0.5);
     transition: 0.4s all;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
 }
 
 .modal__content.active {
     transform: scale(1);
+}
+
+
+
+.close {
+    cursor: pointer;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    background-color: red;
+    border-radius: 7px;
 }

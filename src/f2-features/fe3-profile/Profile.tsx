@@ -22,7 +22,7 @@ export const Profile = () => {
     }
 
     if (!isAuth) return <Navigate to={routesPath.login}/>;
-    return <div>
+    return <div className={s.profile}>
         <img className={s.avatar} src={avatar} alt="avatar"/>
         <div> {name}</div>
         <SuperButton onClick={onClickEditMode}>Edit mode

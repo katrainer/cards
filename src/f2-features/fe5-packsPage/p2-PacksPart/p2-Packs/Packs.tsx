@@ -3,8 +3,8 @@ import {PacksList} from './p2-PacksList/PacksList';
 import React from 'react';
 
 export const Packs = () => {
-    return <div>
+    return <>
         <PacksHeaderLine/>
         <PacksList/>
-    </div>
+    </>
 }

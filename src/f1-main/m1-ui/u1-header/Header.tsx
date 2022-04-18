@@ -16,11 +16,10 @@ export const Header = () => {
         setTimeout(() => navigate(routesPath.login), 1000)
     }
     return <div className={s.containerMain}>
+        <div className={s.header}>
         {isMe && <div style={{width: 74}}></div>}
-        <div></div>
-        <div>
             <h1>The clever cards</h1>
-        </div>
         <div>{isMe && <SuperButton onClick={logOutHandler}>Log Out</SuperButton>}</div>
+        </div>
     </div>
 }

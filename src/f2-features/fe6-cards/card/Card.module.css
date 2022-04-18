@@ -1,28 +1,40 @@
 .block {
     display: flex;
-    text-align: left;
     align-items: center;
     border: 1px solid black;
-}
-.block span {
-    margin: 5px;
+    width: 100%;
 }
 
-.question {
-    width: 500px;
+.block span {
+    padding: 5px;
+    display: flex;
 }
-.answer {
-    width: 500px;
+
+.block span:nth-child(-n+2){
+    width: 30%;
 }
-.lastUpdated {
+
+.block span:nth-child(n+3){
+    width: 15%;
     text-align: center;
-    width: 100px;
 }
-.grade {
-    text-align: center;
-    width: 100px;
-}
-.action {
-    text-align: center;
-    width: 200px;
-}
+
+
+/*.question {*/
+/*    width: 500px;*/
+/*}*/
+/*.answer {*/
+/*    width: 500px;*/
+/*}*/
+/*.lastUpdated {*/
+/*    text-align: center;*/
+/*    width: 100px;*/
+/*}*/
+/*.grade {*/
+/*    text-align: center;*/
+/*    width: 100px;*/
+/*}*/
+/*.action {*/
+/*    text-align: center;*/
+/*    width: 200px;*/
+/*}*/

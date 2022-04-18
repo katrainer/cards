@@ -1,0 +1,23 @@
+.learnWrapper {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 80%;
+}
+.button {
+
+}
+
+.answer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gradeAnswer {
+    display: flex;
+    margin: 10px;
+}

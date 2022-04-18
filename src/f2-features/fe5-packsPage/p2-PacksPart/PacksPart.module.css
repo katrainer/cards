@@ -1,11 +1,13 @@
 .addButton{
-    width: 100%;
+    width: 80%;
     display: flex;
     justify-content: end;
+    margin: 20px;
 }
 .footerTable{
-    width: 100%;
+    width: 80%;
     display: flex;
     justify-content: space-between;
+    /*margin: 0 auto;*/
     align-items: center;
 }

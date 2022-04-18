@@ -7,6 +7,7 @@ import {Card} from "./card/Card";
 import {useParams} from "react-router-dom";
 import {AddCard} from "./card/AddCard";
 import {TableHeaders} from "./card/TableHeaders";
+import s from './Cards.module.css'
 
 type StateType = {
     packId: string
@@ -49,13 +50,13 @@ const {packId, packName} = useParams() as StateType
     }, [sortCards])
 
     return (
-        <div>
-            <h1>{packName}</h1>
+        <div className={s.cards}>
+            <h1 className={s.title}>{packName}</h1>
             {
                 packUserId === myId
                 && <AddCard cardsPack_id={packId} userId={myId}/>
             }
-            <div>
+            <div className={s.table}>
                 <TableHeaders/>
                 {newCards}
             </div>

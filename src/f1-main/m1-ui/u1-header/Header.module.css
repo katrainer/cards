@@ -1,11 +1,25 @@
 .containerMain {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+    /*align-items: center;*/
     border-bottom: black 1px solid;
     z-index: 1000;
     position: fixed;
     height: 50px;
     background: white;
+    top: 0;
+}
+
+.header {
+    width: 82%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.header h1 {
+    margin: 0;
+    padding: 0;
 }

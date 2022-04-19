@@ -2,7 +2,7 @@ import React, {FC, useState} from "react";
 import s from './Card.module.css'
 import {StarRating} from "f1-main/m1-ui/u3-common/c9-starRating/StarRating";
 import SuperButton from "f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton";
-import {Modal} from "f1-main/m1-ui/u3-common/c4-modal/ModalCard";
+import {Modal} from "f1-main/m1-ui/u3-common/c4-modal/Modal";
 import {CardUpdateForm} from "./CardUpdateForm/CardUpdateForm";
 
 type PropsType = {

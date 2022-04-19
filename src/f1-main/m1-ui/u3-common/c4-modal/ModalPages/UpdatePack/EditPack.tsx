@@ -1,32 +1,36 @@
-import SuperButton from "f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton"
-import { useAppSelector } from "f1-main/m2-store/store"
-import { useState } from "react"
-import s from './EditPack.module.scss';
+import { updatePackTC } from "f1-main/m2-store/reducers/packsReducer";
+import { useAppSelector } from "f1-main/m2-store/store";
+import { PackUpdateForm } from "f2-features/fe5-packsPage/PackModal/PackUpdateForm";
+import { useState } from "react";
+import { TiBrush } from "react-icons/ti";
+import { useDispatch } from "react-redux";
+import { Modal } from "../../Modal";
 
+const UpdatePack = () => {
+  const [editMode, setEditMode] = useState(false);
+  const dispatch = useDispatch();
 
-type updateNamePacksPropsType = {
-    updatePack: (id: string, newName: string) => void
-}
+  const updatePack = (_id:string, name: string) => {
+    setEditMode(false);
+    dispatch(updatePackTC(_id, name));
+  };
 
-const UpdatePack = ({updatePack}: updateNamePacksPropsType) => {
-
-    const id = useAppSelector<string>(state => state.modal.id)
-    const name = useAppSelector<string>(state => state.modal.name)
-    const [value, setValue] = useState(name)
-    
-
-    const updatePackName = () => {
-        updatePack(id, value)
-    }
-
-    return (
-        <div className={s.add_packs_container}>
-            <p>New name:</p>
-            <input value={value} onChange={(e) => setValue(e.currentTarget.value)} placeholder={'Name'}/>
-
-            <SuperButton onClick={updatePackName}>Update name</SuperButton>
+  return (
+    <div>
+      <div>
+        <div
+          onClick={() => {
+            setEditMode(true);
+          }}
+        >
+          <TiBrush />
         </div>
-    )
-}
+      </div>
+      <Modal editMode={editMode} setEditMode={setEditMode}>
+        <PackUpdateForm updatePack={updatePack} />
+      </Modal>
+    </div>
+  );
+};
 
-export default UpdatePack
+export default UpdatePack;

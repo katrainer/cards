@@ -9,10 +9,18 @@ import {useDispatch} from 'react-redux';
 import SuperButton from '../../../f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton';
 import {addPackModalAC} from '../../../f1-main/m2-store/reducers/modal-reducer';
 import s from './PacksPart.module.css'
+import { AddPack } from 'f1-main/m1-ui/u3-common/c4-modal/ModalPages/AddPack/AddPack';
+import { useParams } from 'react-router-dom';
 
 const arr = ['16', '12', '8', '4']
 
+type StateType = {
+    id: string
+    name: string
+}
+
 export const PacksPart = () => {
+    const {id, name} = useParams() as StateType
     const dispatch = useDispatch()
     const totalCount = useAppSelector<number>(state => state.packs.cardPacksTotalCount)
     const pageCount = useAppSelector<number>(state => state.packs.requestPacksData.pageCount)
@@ -42,7 +50,8 @@ export const PacksPart = () => {
     return <>
         <h2>Packs</h2>
         <div className={s.addButton}>
-            <SuperButton onClick={addPackHandler}>Add Pack</SuperButton>
+            {/* <SuperButton onClick={addPackHandler}>Add Pack</SuperButton> */}
+            {<AddPack />}
         </div>
         <Packs/>
         <div className={s.footerTable}>

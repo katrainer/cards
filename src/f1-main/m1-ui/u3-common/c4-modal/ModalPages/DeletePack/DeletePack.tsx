@@ -1,28 +1,37 @@
-import SuperButton from "f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton"
-import { useAppSelector } from "f1-main/m2-store/store"
-import s from "./DeletePack.module.scss"
+import { deletePackTC } from "f1-main/m2-store/reducers/packsReducer";
+import { useAppSelector } from "f1-main/m2-store/store";
+import { PackDeleteForm } from "f2-features/fe5-packsPage/PackModal/PackDeleteForm";
+import { useState } from "react";
+import { AiOutlineDelete } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { Modal } from "../../Modal";
 
-type DeletePacksPropsType = {
-    deletePack: (id: string) => void
-}
+const DeletePack = () => {
+  const id = useAppSelector<string>((state) => state.modal.id);
+  const [editMode, setEditMode] = useState(false);
+  const dispatch = useDispatch();
 
-const DeletePack = ({deletePack}: DeletePacksPropsType) => {
-    const id = useAppSelector<string>(state => state.modal.id)
-    const name = useAppSelector<string>(state => state.modal.name)
+  const deletePack = () => {
+    setEditMode(false);
+    dispatch(deletePackTC(id));
+  };
 
-
-    const deletePackOnClick = () => {
-        deletePack(id)
-    }
-
-
-    return (
-        <div className={s.delete_packs_container}>
-            <p>Do you really want to remove pack -<a> {name}</a>?</p>
-            <p>All cards will be excluded from this course.</p>
-            <SuperButton onClick={deletePackOnClick} className={s.delete_button}>Delete</SuperButton>
+  return (
+    <div>
+      <div>
+        <div
+          onClick={() => {
+            setEditMode(true);
+          }}
+        >
+         <AiOutlineDelete/>
         </div>
-    )
-}
+      </div>
+      <Modal editMode={editMode} setEditMode={setEditMode}>
+        <PackDeleteForm deletePack={deletePack} id={id} />
+      </Modal>
+    </div>
+  );
+};
 
-export default DeletePack
+export default DeletePack;

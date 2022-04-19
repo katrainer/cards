@@ -128,10 +128,10 @@ export const deletePackTC = (id: string): AppThunk => async dispatch => {
         }
     }
 }
-export const updatePackTC = (id: string, name: string): AppThunk => async dispatch => {
+export const updatePackTC = (_id: string, name: string): AppThunk => async dispatch => {
     dispatch(changeRequestStatusAC('loading'))
     try {
-        const res = await packs.updatePack(id, name)
+        const res = await packs.updatePack(_id, name)
         dispatch(setActiveModalAC(false))
         dispatch(changeRequestStatusAC('succeeded'))
         dispatch(getAllPacks())

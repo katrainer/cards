@@ -10,7 +10,7 @@ export const Modal: FC<PropsType> = memo(({editMode, setEditMode, children}) => 
     return (
         <div className={editMode ? `${s.modal} ${s.active}` : s.modal}>
             <div className={editMode ? `${s.modal__content} ${s.active}` : s.modal__content}>
-            <span onClick={()=>setEditMode(false)}>x</span>
+            <span onClick={()=>setEditMode(false)}>❌</span>
                 {children}
             </div>
         </div>

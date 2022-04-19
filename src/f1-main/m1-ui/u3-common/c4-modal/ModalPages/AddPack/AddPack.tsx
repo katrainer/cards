@@ -1,39 +1,38 @@
-import { useState } from "react";
-import SuperCheckbox from "f1-main/m1-ui/u3-common/c3-SuperCheckbox/SuperCheckbox";
 import SuperButton from "f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton";
-import s from './AddPacks.module.scss'
+import { PackAddForm } from "f2-features/fe5-packsPage/PackModal/PackAddForm";
+import React, { FC, useState } from "react";
+import { Modal } from "../../Modal";
+import { useDispatch } from "react-redux";
+import { addPackTC } from "f1-main/m2-store/reducers/packsReducer";
 
-type AddPacksPropsType = {
-    addNewPack: (name: string, privateBoolean: boolean) => void
-};
 
-const AddPacks = ({ addNewPack }: AddPacksPropsType) => {
-  const [privateBoolean, setPrivateBoolean] = useState<boolean>(false);
-  const [name, setName] = useState('')
 
-  const addNewPackOnClick = () => {
-    addNewPack(name, privateBoolean);
-  };
-  
+
+export const AddPack = () => {
+  const [editMode, setEditMode] = useState(false);
+  const dispatch = useDispatch()
+
+const addNewPack = (name: string, privateBoolean: boolean)=>{
+  setEditMode(false)
+dispatch(addPackTC(name, privateBoolean))
+}
+
   return (
-    <div className={s.add_packs_container}>
-      <p>New pack:</p>
-      <input
-        value={name}
-        onChange={e=>setName(e.currentTarget.value)}
-      />
-        <SuperCheckbox
-          checked={privateBoolean}
-          onChange={(e) => setPrivateBoolean(e.currentTarget.checked)}
+    <div>
+      <div >
+        <SuperButton
+          onClick={() => {
+            setEditMode(true);
+          }}
         >
-          Private
-        </SuperCheckbox>
-        <SuperButton onClick={addNewPackOnClick}>Add Pack</SuperButton>
-      
+          Add pack
+        </SuperButton>
+      </div>
+      <Modal editMode={editMode} setEditMode={setEditMode}>
+        <PackAddForm addNewPack={addNewPack} />
+      </Modal>
     </div>
   );
 };
-
-export default AddPacks;
 
 

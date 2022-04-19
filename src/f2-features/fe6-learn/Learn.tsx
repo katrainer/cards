@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Modal} from "../../f1-main/m1-ui/u3-common/c4-modal/ModalCard";
+import {Modal} from "../../f1-main/m1-ui/u3-common/c4-modal/Modal";
 import SuperButton from "../../f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton";
 import {CardsType, GradeType} from "../../f1-main/m3-API/apiCards";
 import {useDispatch} from "react-redux";

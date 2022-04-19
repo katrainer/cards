@@ -1,4 +1,3 @@
-import s from '../../CardsUpdateForm/CardsUpdateForm.module.css'
 import {useDispatch} from 'react-redux';
 import {useFormik} from 'formik';
 import SuperInputText from 'f1-main/m1-ui/u3-common/c1-SuperInputText/SuperInputText';
@@ -27,7 +26,7 @@ export const CardUpdateForm = ({setEditMode, cardId, cardsPack_id}: PropsType) =
         }
     })
     return (
-        <form className={s.form} onSubmit={formik.handleSubmit}
+        <form  onSubmit={formik.handleSubmit}
               onClick={e => e.stopPropagation()}>
             <SuperInputText placeholder={'question'} {...formik.getFieldProps('question')}/>
             <SuperInputText placeholder={'answer'} {...formik.getFieldProps('answer')}/>

@@ -1,10 +1,9 @@
 import SuperButton from "f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton";
-import { addPackTC } from "f1-main/m2-store/reducers/packsReducer";
-import { PackAddForm } from "f2-features/fe5-packsPage/PackModal/PackAddForm";
-import { useState } from "react";
+import { PackAddForm } from "f2-features/fe5-packsPage/PackModal/AddPack/PackAddForm";
+import React, { FC, useState } from "react";
+import { Modal } from "../../../../f1-main/m1-ui/u3-common/c4-modal/Modal";
 import { useDispatch } from "react-redux";
-import { Modal } from "../../Modal";
-
+import { addPackTC } from "f1-main/m2-store/reducers/packsReducer";
 
 export const AddPack = () => {
   const [editMode, setEditMode] = useState(false);

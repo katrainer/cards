@@ -1,6 +1,6 @@
 import SuperButton from "f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton";
 import { addPackTC } from "f1-main/m2-store/reducers/packsReducer";
-import { PackAddForm } from "f2-features/fe5-packsPage/PackModal/PackAddForm";
+import { PackAddForm } from "f2-features/fe5-packsPage/PackModal/AddPack/PackAddForm";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Modal } from "../../Modal";

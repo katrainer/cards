@@ -12,12 +12,13 @@ export const PackAddForm = ({ addNewPack }: PropsType) => {
 
   const addNewPackOnClick = () => {
     addNewPack(name, privateBoolean);
+    setName("")
   };
 
   return (
     <div>
       <p>New pack:</p>
-      <input value={name} onChange={(e) => setName(e.currentTarget.value)} />
+      <input type='text' placeholder='new pack' value={name} onChange={(e) => setName(e.currentTarget.value)} />
       <SuperCheckbox
         checked={privateBoolean}
         onChange={(e) => setPrivateBoolean(e.currentTarget.checked)}

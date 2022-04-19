@@ -12,7 +12,7 @@ export const packs = {
     },
     //Удаление колоды
     deletePack(id: string) {
-        return instance.delete(`cards/pack?id=${id}`)
+         return instance.delete(`cards/pack?id=${id}`)
     },
     //Обновление колоды
     updatePack(_id: string, name: string) {

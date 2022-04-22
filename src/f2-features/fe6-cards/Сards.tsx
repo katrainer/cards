@@ -4,10 +4,12 @@ import {useDispatch} from "react-redux";
 import {removeCardTC, setCardsTC} from "../../f1-main/m2-store/reducers/cardsReducer";
 import {useAppSelector} from "../../f1-main/m2-store/store";
 import {Card} from "./card/Card";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {AddCard} from "./card/AddCard";
 import {TableHeaders} from "./card/TableHeaders";
 import s from './Cards.module.css'
+import {routesPath} from "../../f1-main/m1-ui/u2-routes/routesPath";
+import SuperButton from "../../f1-main/m1-ui/u3-common/c2-SuperButton/SuperButton";
 
 type StateType = {
     packId: string
@@ -17,6 +19,7 @@ type StateType = {
 export const Cards: FC = () => {
     console.log('render')
 const {packId, packName} = useParams() as StateType
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const cards = useAppSelector(state => state.cards.cards)
     const sortCards = useAppSelector(state => state.cards.sortCards)
@@ -52,14 +55,19 @@ const {packId, packName} = useParams() as StateType
     return (
         <div className={s.cards}>
             <h1 className={s.title}>{packName}</h1>
+            <div className={s.buttons}>
+            <SuperButton
+                onClick={() => navigate(`${routesPath.learn}/${packId}/${packName}`)}
+            >   Learn
+            </SuperButton>
             {
                 packUserId === myId
                 && <AddCard cardsPack_id={packId} userId={myId}/>
             }
-            <div className={s.table}>
+            </div>
                 <TableHeaders/>
                 {newCards}
-            </div>
+
         </div>
     );
 };

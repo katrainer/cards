@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from 'f1-main/m2-store/store';
 import {logOutTC} from 'f1-main/m2-store/reducers/authReducer';
 import SuperButton from '../u3-common/c2-SuperButton/SuperButton';
+import React from "react";
 
 
 export const Header = () => {
@@ -17,7 +18,10 @@ export const Header = () => {
     }
     return <div className={s.containerMain}>
         <div className={s.header}>
-        {isMe && <div style={{width: 74}}></div>}
+        {isMe &&   <SuperButton
+            onClick={() => navigate(-1)}
+        >   Back
+        </SuperButton>}
             <h1>The clever cards</h1>
         <div>{isMe && <SuperButton onClick={logOutHandler}>Log Out</SuperButton>}</div>
         </div>

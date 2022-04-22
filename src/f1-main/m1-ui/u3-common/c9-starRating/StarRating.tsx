@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import s from './StarRating.module.css'
 import {FaStar} from 'react-icons/fa'
 
@@ -8,7 +8,7 @@ type PropsType = {
 }
 
 export const StarRating: FC<PropsType> = ({rating, callback}) => {
-    const [hover, setHover] = useState<number>(0)
+    // const [hover, setHover] = useState<number>(0)
     return (
         <div>
             {[...Array(5)].map((star, i) => {
@@ -26,9 +26,10 @@ export const StarRating: FC<PropsType> = ({rating, callback}) => {
                         />
                         <FaStar
                             className={s.star}
-                            color={ratingValue <= (hover || rating) ? '#21268F' : '#D7D8EF'}
-                            onMouseEnter={() => setHover(ratingValue)}
-                            onMouseLeave={() => setHover(0)}
+                            color={ratingValue <= (rating) ? '#21268F' : '#D7D8EF'}
+                            //{ratingValue <= (hover || rating) ? '#21268F' : '#D7D8EF'}
+                            // onMouseEnter={() => setHover(ratingValue)}
+                            // onMouseLeave={() => setHover(0)}
                         />
                     </label>
                 )

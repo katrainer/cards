@@ -12,13 +12,13 @@ export const AddCard: FC<HeaderCardsPropsType> = ({cardsPack_id,userId}) => {
     const [editMode, setEditMode] = useState(false)
 
     return (
-        <div>
+        <>
                 <SuperButton onClick={() => {
                     setEditMode(true)
                 }}>Add card</SuperButton>
                 <Modal editMode={editMode} setEditMode={setEditMode}>
                     <CardsUpdateForm setEditMode={setEditMode} cardsPack_id={cardsPack_id}/>
                 </Modal>
-        </div>
+        </>
     );
 };

@@ -78,7 +78,6 @@ export const Learn = () => {
     // }
     return (
         <div className={s.learnWrapper}>
-            {/*<SuperButton onClick={()=> {setEditMode(true)}}>start</SuperButton>*/}
             <h2>
                 {packName}
             </h2>
